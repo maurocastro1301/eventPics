@@ -1,0 +1,210 @@
+<html>
+<head>
+ <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
+ <title>Camara</title>
+ 
+ <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+ <!--script src="//code.jquery.com/jquery-1.10.2.min.js"></script-->
+ <script src="js/jquery.js"></script>
+ <script src="js/jquery.mobile-1.4.5.min.js"></script>
+ <script src="cordova.js"></script> 
+
+ <script type="text/javascript">
+ 
+  document.addEventListener("deviceready",onDeviceReady,false);
+  
+  
+    // PhoneGap is ready to be used!
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+	
+    }
+ 
+ function getImage() {
+ navigator.camera.getPicture(uploadPhoto, function(message) {
+ //alert('get picture failed');
+ }, {
+ quality: 100,
+ destinationType: navigator.camera.DestinationType.FILE_URI,
+ sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+ });
+}
+
+
+function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+	 //  alert('Capturar Foto');
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 80, correctOrientation: 1});
+	 
+	  var options = {
+
+      /*  quality: 50,
+
+        destinationType: Camera.DestinationType.DATA_URL,
+
+        sourceType: Camera.PictureSourceType.CAMERA,
+
+        allowEdit: false,
+
+        encodingType: Camera.EncodingType.JPEG,
+
+        targetWidth: 500,
+
+        targetHeight: 500,
+
+        popoverOptions: CameraPopoverOptions,
+
+        saveToPhotoAlbum: false*/
+	
+      };
+	  /*
+	  navigator.camera.getPicture(onPhotoURISuccess, onFail, { 
+	  quality: 95,
+  correctOrientation: 1
+	  });*/
+	  
+	 
+    }
+
+
+	  function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+      // Get image handle
+      //
+	  
+	 // alert('onPhotoURISuccess');
+	  
+      var largeImage = document.getElementById('smallImage');
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
+      // Show the captured photo
+      // The in-line CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+	  
+	  document.getElementById('tomarfoto').style.display = 'none';
+	  document.getElementById('galeria').style.display = 'none';
+	  document.getElementById('subirfoto').style.display = 'block';
+	  
+	  
+    }
+  
+
+function onFail(message) {
+      //alert('Failed because: ' + message);
+    }
+
+
+function test() {
+     
+	$.mobile.loading( "show", {
+            text: "Procesando",
+            textVisible: true,
+            theme: "a",
+            html: ""
+    });
+	 
+	}
+	
+	
+function uploadPhotoPreview() {
+
+ 
+ $.mobile.loading( "show", {
+            text: "Procesando",
+            textVisible: true,
+            theme: "a",
+            html: ""
+    });
+	
+var imageURI = document.getElementById("smallImage").src;
+
+//document.getElementById('smallImage').style.display = 'none';
+
+ var options = new FileUploadOptions();
+ options.fileKey = "file";
+ options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+ options.mimeType = "image/jpeg";
+ console.log(options.fileName);
+ var params = new Object();
+ params.value1 = "test";
+ params.value2 = "param";
+ options.params = params;
+ options.chunkedMode = false;
+
+var ft = new FileTransfer();
+ ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php", function(result){
+ console.log(JSON.stringify(result));
+  $.mobile.loading("hide");
+  alert('Foto Subida Existosamente');
+ }, function(error){
+ $.mobile.loading("hide");
+ //alert('Failed because: ' + error);
+ console.log(JSON.stringify(error));
+ }, options);
+ }
+	
+
+function uploadPhoto(imageURI) {
+
+$.mobile.loading( "show", {
+            text: "Procesando",
+            textVisible: true,
+            theme: "a",
+            html: ""
+    });
+ 
+ var options = new FileUploadOptions();
+ options.fileKey = "file";
+ options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+ options.mimeType = "image/jpeg";
+ console.log(options.fileName);
+ var params = new Object();
+ params.value1 = "test";
+ params.value2 = "param";
+ options.params = params;
+ options.chunkedMode = false;
+
+var ft = new FileTransfer();
+ ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php", function(result){
+ console.log(JSON.stringify(result));
+ $.mobile.loading("hide");
+  alert('Foto Subida Existosamente');
+ }, function(error){
+$.mobile.loading("hide");
+ // alert('Failed because: ' + error);
+ console.log(JSON.stringify(error));
+ }, options);
+ }
+ 
+ </script>
+</head>
+<body>
+
+
+
+  <div role="main" class="ui-content">
+	<a id = "tomarfoto" class="ui-btn ui-btn-a" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true" onclick="capturePhoto()">Tomar una Foto</a>
+	<button  id = "galeria" class="ui-btn ui-btn-c" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true" onclick="getImage()">Galería</button>
+	
+	
+	<button  id = "galeria" class="ui-btn ui-btn-c" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true" href="index_login.html">Galería</button>
+	
+
+	<center><img style="display:none;width:70%;height:70%;" id="smallImage" src="" /></center>
+	<button id = "subirfoto"  style="display:none;" onclick="uploadPhotoPreview()" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Subir Imagen</button>
+
+
+
+  <a href="feed.html" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Volver</a>
+	 
+	<!--button  onclick="test()" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button-->
+  <!--center><img style="display:none;width:50%;height:50%;" id="largeImage" src="" /></center-->
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Capture Audio,Image,Video</title>
+<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="json2.js"></script>
+<script type="text/javascript" charset="utf-8">
+// Called when capture operation is finished
+//
+function captureSuccess(mediaFiles) {
+var i, len;
+for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+uploadFile(mediaFiles[i]);
+}
+}
+function captureSuccess2(mediaFiles) {
+var i, len;
+for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+uploadFile2(mediaFiles[i]);
+}
+}
+function captureSuccess3(mediaFiles) {
+var i, len;
+for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+uploadFile3(mediaFiles[i]);
+}
+}
+// Called if something bad happens.
+//
+function captureError(error) {
+var msg = "An error occurred during capture: " + error.code;
+navigator.notification.alert(msg, null, "Uh oh!");
+}
+function captureError2(error) {
+var msg = "An error occurred during capture: " + error.code;
+navigator.notification.alert(msg, null, "Uh oh!");
+}
+function captureError3(error) {
+var msg = "An error occurred during capture: " + error.code;
+navigator.notification.alert(msg, null, "Uh oh!");
+}
+// A button will call this function
+//
+function captureAudio() {
+// Launch device audio recording application,
+// allowing user to capture up to 2 audio clips
+navigator.device.capture.captureAudio(captureSuccess, captureError, {limit: 2});
+}
+function captureImage()
+{
+// Launch device camera application,
+// allowing user to capture up to 2 images
+navigator.device.capture.captureImage(captureSuccess2, captureError2, {limit: 2});
+}
+function captureVideo() {
+// Launch device video recording application,
+// allowing user to capture up to 2 video clips
+navigator.device.capture.captureVideo(captureSuccess3, captureError3, {limit: 2});
+}
+// Upload files to server
+function uploadFile(mediaFile) {
+var win = function (r) {
+alert("Code = " + r.responseCode);
+alert("Bytes Sent = " + r.bytesSent);
+alert("Audio Uploaded");
+}
+var fail = function (error) {
+alert("An error has occurred: Code = " + error.code);
+alert("upload error source " + error.source);
+alert("upload error target " + error.target);
+}
+var options = new FileUploadOptions();
+//options.fileKey = mediafile.file;
+options.fileName = mediaFile.file;
+options.mimeType = "audio/wav";
+fileURL=mediaFile.fullPath;
+var ft = new FileTransfer();
+ft.upload(fileURL, encodeURI("http://mncphonegap.esy.es/phpmysql/upload.php"), win, fail,
+options);
+}
+function uploadFile2(mediaFile) {
+var win = function (r) {
+alert("Code = " + r.responseCode);
+alert("Bytes Sent = " + r.bytesSent);
+alert("Image Uploaded");
+}
+var fail = function (error) {
+alert("An error has occurred: Code = " + error.code);
+alert("upload error source " + error.source);
+alert("upload error target " + error.target);
+}
+var options = new FileUploadOptions();
+//options.fileKey = mediafile.file;
+options.fileName = mediaFile.file;
+options.mimeType = "text/plain";
+ImageURL=mediaFile.fullPath;
+var ft = new FileTransfer();
+ft.upload(ImageURL, encodeURI("http://mncphonegap.esy.es/phpmysql/upload.php"), win, fail,
+options);
+}
+function uploadFile3(mediaFile) {
+var win = function (r) {
+alert("Code = " + r.responseCode);
+alert("Bytes Sent = " + r.bytesSent);
+alert("Video Uploaded");
+}
+var fail = function (error) {
+alert("An error has occurred: Code = " + error.code);
+alert("upload error source " + error.source);
+alert("upload error target " + error.target);
+}
+var options = new FileUploadOptions();
+//options.fileKey = mediafile.file;
+options.fileName = mediaFile.file;
+options.mimeType = "video/mpeg";
+VideoURL=mediaFile.fullPath;
+var ft = new FileTransfer();
+ft.upload(VideoURL, encodeURI("http://mncphonegap.esy.es/phpmysql/upload.php"), win, fail,
+options);
+}
+</script>
+</head>
+<body>
+<center><h1>MCA3B Capture Session</h1></center><br><br>
+<center> <button onclick="captureAudio();">Capture Audio</button> <br><br>
+<button onclick="captureImage();">Capture Image</button> <br><br>
+<button onclick="captureVideo();">Capture Video</button> <br>
+</center>
+</body>
+</html>  
+
+
+
+ 

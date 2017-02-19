@@ -1,0 +1,108 @@
+<html>
+
+  <meta name="viewport" content="width=device-width,user-scalable=no">
+
+<head>
+    <!--link rel="stylesheet" type="text/css" href="css/ionic.css"-->
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+ <!--script src="//code.jquery.com/jquery-1.10.2.min.js"></script-->
+ <script src="js/jquery.js"></script>
+ <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+ 
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "http://mncphonegap.esy.es/phpmysql/photo.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                var url = field.url;
+                var user  = "Mauro Castro";
+				var fecha = "September 16, 2014";
+				var descripcion = "Fantastic Architecture #architecture";
+				
+              // $("#listview").append("<a class='item' href='form.html?id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>$" + price + "</span><h2>" + title + " </h2><p>" + duration + "</p></a>");
+			  
+			  //$("#listview").append("<a class='item'><center><img style='width:70%;height:70%;' id='image' data-rel='external' src='" + url +"' /></center></a>");
+			$("#listview").prepend("<li><div class='photo-box'><div class='image-wrap'><div class='user'>"+ user + " </div><img src='"+ url + "'></div><div class='description'>"+ descripcion+ " <div class='dateCustom'>"+ fecha +"</div></div></div></li>");
+			 
+			 //	"<div class='photo-box'><div class='image-wrap'><div class='user'>"+ user + " </div><img src='"+ url + "'></div><div class='description'>"+ descripcion+ " <div class='date'>"+ fecha +"</div></div></div>"
+                                    
+          
+                       	
+			  
+			  
+            });
+        });
+    });
+
+	function reload(){
+	 var url = "http://mncphonegap.esy.es/phpmysql/photo.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                //var url = field.url;
+				var url = "images/1483619519528.jpg.jpg";
+                var user  = "FOTO RELOAD";
+				var fecha = "September 16, 2014";
+				var descripcion = "Fantastic Architecture #architecture";
+				
+              // $("#listview").append("<a class='item' href='form.html?id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>$" + price + "</span><h2>" + title + " </h2><p>" + duration + "</p></a>");
+			  
+			  //$("#listview").append("<a class='item'><center><img style='width:70%;height:70%;' id='image' data-rel='external' src='" + url +"' /></center></a>");
+			$("#listview").prepend("<li><div class='photo-box'><div class='image-wrap'><div class='user'>"+ user + " </div><img src='"+ url + "'></div><div class='description'>"+ descripcion+ " <div class='dateCustom'>"+ fecha +"</div></div></div></li>");
+			 
+			 //	"<div class='photo-box'><div class='image-wrap'><div class='user'>"+ user + " </div><img src='"+ url + "'></div><div class='description'>"+ descripcion+ " <div class='date'>"+ fecha +"</div></div></div>"
+                                    
+          
+                       	
+			  
+			  
+            });
+        });
+	
+	}
+	
+	function locationPage() {
+	//window.location.href = "Photoswipe/photoswipe.html"
+	window.location.href = "camera.html"
+}
+	
+    </script>
+</head>
+
+<body>
+
+
+<div data-role="page" id="page-feed">
+<div data-role="header"  data-position="fixed">
+      <a onclick="locationPage()" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+	  <a onclick="reload()"  class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
+
+        <h1>Photo FEED</h1>
+    </div>
+	
+<div class="instagram-content">            
+     <div class="row photos-wrap">
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+	<ul data-role="listview"id="listview">
+	</ul>
+ </div> 
+</div>
+</div>	
+
+
+
+<div data-role="footer" data-position="fixed">
+<h1>Footer</h1>
+</div>
+</div>
+
+</body>
+
+</html>

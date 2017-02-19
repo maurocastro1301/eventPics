@@ -1,0 +1,380 @@
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+<script src="js/gallery.js"></script>
+ <script src="cordova.js"></script>
+    <link rel="stylesheet" href="css/sweetalert.css">
+ <script src="js/sweetalert.min.js"></script>
+
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"> 
+<link rel="stylesheet" href="css/bio.css"> 
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+
+
+
+<style>
+
+.home {
+    float: left;
+    height: 145px;
+    margin-bottom: 0%;
+    overflow: hidden;
+    list-style: none;
+    
+}
+
+.home.w5 {
+     width: 33.3%; 
+     border: 3px solid white;
+     
+}
+
+.ui-grid-b img {
+ 
+  height: 100%;
+  min-width: 100%;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%); 
+}
+
+.home.w5 img{
+ 
+  height: 100%;
+  min-width: 100%;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%); 
+}
+
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}   
+
+
+
+.flat-btn {
+ width:  32px;
+    height: 32px;
+    border: 0;
+    margin: 4px;   
+  	background: url("images/camera_20.svg") no-repeat;
+    background-size: auto 100%;
+
+}
+
+.ui-btn.buttonCustom{
+  width:  100%;
+    height: 65px;  
+    background: url("images/camera_20.svg") no-repeat;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+}
+
+.countdown{
+   text-align: center;
+  font-size: 40px;   
+}
+
+</style>
+
+
+<script type="text/javascript">
+              
+ 
+
+
+   
+ function getImage() {
+ navigator.camera.getPicture(uploadPhoto, function(message) {
+ //alert('get picture failed');
+ }, {
+ quality: 100,
+ destinationType: navigator.camera.DestinationType.FILE_URI,
+ sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+ });
+}
+
+
+function capturePhoto() {
+	
+      // Take picture using device camera and retrieve image as base64-encoded string
+	  
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { 
+          targetWidth: 1200, 
+        targetHeight: 1200,
+         allowEdit : true,
+          quality: 90, 
+          correctOrientation: 1
+        });
+	 
+    }
+
+
+  
+
+function onFail(message) {
+      //alert('Failed because: ' + message);
+     // swal("Oops...", message, "error");
+    }
+
+	
+	
+function uploadPhotoPreview() {
+
+ 
+ $.mobile.loading( "show", {
+            text: "Procesando",
+            textVisible: true,
+            theme: "a",
+            html: ""
+    });
+	
+var imageURI = document.getElementById("smallImage").src;
+
+//document.getElementById('smallImage').style.display = 'none';
+
+var d = new Date();
+
+
+ var options = new FileUploadOptions();
+ options.fileKey = "file";
+// options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+ options.fileName = d.getTime()+".jpg";
+ options.mimeType = "image/jpeg";
+ console.log(options.fileName);
+ var params = new Object();
+ params.value1 = "test";
+ params.value2 = "param";
+ options.params = params;
+ options.chunkedMode = false;
+
+var ft = new FileTransfer();
+ ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php?event_id="+localStorage.event_id+"&user_id="+localStorage.user_id+"&event_code="+localStorage.event_code, function(result){
+ console.log(JSON.stringify(result));
+  $.mobile.loading("hide");
+  
+swal("Foto Subida Correctamente", "", "success");
+window.location.href = "#page-feed";
+$("#reload_button").click();
+
+ }, function(error){
+ $.mobile.loading("hide");
+
+ console.log(JSON.stringify(error));
+ }, options);
+} 
+
+/*
+function uploadPhoto(imageURI) {
+
+$.mobile.loading( "show", {
+            text: "Procesando",
+            textVisible: true,
+            theme: "a",
+            html: ""
+    });
+ 
+ var options = new FileUploadOptions();
+ options.fileKey = "file";
+ options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+ options.mimeType = "image/jpeg";
+ console.log(options.fileName);
+ var params = new Object();
+ params.value1 = "test";
+ params.value2 = "param";
+ options.params = params;
+ options.chunkedMode = false;
+
+var ft = new FileTransfer();
+
+ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php?event_id="+localStorage.event_id+"&user_id="+localStorage.user_id+"&event_code="+localStorage.event_code, function(result){
+ console.log(JSON.stringify(result));
+ $.mobile.loading("hide");
+swal("Foto Subida Correctamente", "", "success");
+ }, function(error){
+$.mobile.loading("hide");
+ 
+ console.log(JSON.stringify(error));
+ }, options);
+ }
+*/
+
+</script>
+
+</head>
+
+<body style="background-color:white;">
+
+<div data-role="page" id="page-bio" style="background-color:white;">
+<div data-role="header"  data-position="fixed" style="height: 3em">        
+    <a id ="camera_button" class="flat-btn" data-shadow="false"></a>
+    <!--a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a-->
+    <h1>BIO</h1>
+</div>
+
+<div class="countdown" id="countdown"></div>
+<div id="bio-content"></div>
+
+<!--Footer-->
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar" data-iconpos="bottom" >
+<ul>
+
+<li><button id="button_page1" data-icon="home" style = "border-top: 3px solid black">Bio</button></li>
+<li><button id="button_page2" data-icon="home">Galeria</button></li>
+<li><button id="button_page4" data-icon="home" >Guest Book</button></li>
+<li><button  class="buttonCustom"  id ="camera_button"></button></li>
+</ul>
+</div>
+</div><!-- /footer -->
+
+</div> <!--PAGE-BIO-->    
+
+<div data-role="page"  id="page-feed" style="background-color:white;">
+    <div data-role="header"  data-position="fixed" style="height: 3em">
+        <!--a onclick="locationPage()" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-icon-cameraCustom"  data-transition="slide" data-direction="reverse"></a-->
+        <a id ="camera_button" class="flat-btn" data-shadow="false"></a>
+        <a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
+            <h1>Photo FEED</h1>
+    </div>
+
+
+<div id="grid">
+</div><!-- /grid-b -->
+
+
+<!--Footer-->
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar" data-iconpos="bottom" >
+<ul>
+
+<li><button id="button_page1" data-icon="home" >Bio</button></li>
+<li><button id="button_page2" data-icon="home" style = "border-top: 3px solid black">Galeria</button></li>
+
+<li><button id="button_page4" data-icon="home" >Guest Book</button></li>
+<li><button  class="buttonCustom"  id ="camera_button"></button></li>
+</ul>
+</div>
+</div><!-- /footer -->
+</div> <!-- /page-feed -->
+
+<div data-role="page" id="page2">
+<div data-role="header"  data-position="fixed">
+<h1>Pagina 2</h1>
+</div>
+
+
+<h1>First tab contents</h1>
+
+<button id ="foto_test" >FOTO</button>
+<button id ="test" >Test</button>
+
+
+	
+
+
+<div data-role="footer" data-position="fixed" style="height: 4em">
+<div data-role="navbar" data-iconpos="bottom" >
+<!--li><a href="#page-feed" data-icon="star" class="ui-btn-active ui-state-persist">Favs</a></li>
+<li><a href="#page2" data-icon="grid">Summary</a></li>
+<li><a href="#" data-icon="gear">Setup</a></li>
+<li><a href="#" data-icon="gear">Setup</a></li-->
+<ul>
+<li><button id="button_page1" data-icon="home">One</button></li>
+<li><button id="button_page2" data-icon="home" style = "border-top: 3px solid black">Two</button></li>
+<li><button id="button_page3" data-icon="home" >3</button></li>
+<li><button id="button_page4" data-icon="home" >4</button></li>
+<li><button id="button_page4" data-icon="home" >5</button></li>
+</ul>
+</div>
+</div>
+
+</div> 
+
+
+<div data-role="page" id="page-content" style="background-color:white;" >
+<div data-role="header"  data-position="fixed">
+    <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+<h1>preview</h1>
+</div>
+<div class="loader"></div>
+<div class="instagram-content">            
+     <div class="row photos-wrap">
+        <div id ="contenido" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+	        
+            <!--div class="photo-box">
+                <div class="image-wrap">
+                     <div class="user">Mauro castro</div>
+                     <img src="images/1484754084377.jpg.jpg">
+                </div>
+                <div class="description">DESCRIPCION
+                    <div class="dateCustom">fecha</div>
+                </div>
+            </div-->
+        </div> 
+    </div>
+</div>
+</div> 
+
+<div data-role="page" id="page-camera" >
+<div data-role="header"  data-position="fixed">
+    <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+<h1>Camera</h1>
+</div>
+
+  <div role="main" class="ui-content">
+
+
+<div class="instagram-content">            
+     <div class="row photos-wrap">
+        <div id ="contenido" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+	        
+            <div class="photo-box">
+                <div class="image-wrap">
+                   <img id="smallImage"  src="">    
+                     
+                    
+                </div>
+
+                
+                
+
+            </div>
+        </div> 
+    </div>
+</div>
+ 
+	<!--center><img style="display:none;width:70%;height:40%; display:inline-block;vertical-align:top;" id="smallImage" src="" /></center-->
+	<button id = "subirfoto"  onclick="uploadPhotoPreview()" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Subir Imagen</button>
+    <a href="#page-feed" class="ui-btn ui-btn-b loginButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Cancelar</a>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+</body>
+
+</html>

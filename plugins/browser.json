@@ -1,0 +1,34 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        },
+        "cordova-plugin-ios-camera-permissions": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        }
+    }
+}

@@ -1,0 +1,64 @@
+
+/*
+.ui-header {
+position : fixed;
+top : 20px;
+left : 0;
+width : 100%;
+height : 40px;
+}*/
+
+
+.button_image{
+ width:  32px;
+    height: 32px;
+    border: 0;
+  	background: url("images/camera_20.svg") no-repeat;
+    background-size: auto 100%;
+}
+
+
+.home {
+    float: left;
+    height: 155px;
+    margin-bottom: 0%;
+    overflow: hidden;
+    list-style: none;
+}
+
+.home.w5 {
+     width: 33.3%; 
+}
+
+
+.ui-grid-b img {
+  height: 100%;
+  min-width: 100%;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%); 
+}
+
+
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}   
+
+
+
+.flat-btn {
+ width:  32px;
+    height: 32px;
+    border: 0;
+    margin: 4px;   
+  	background: url("images/camera_20.svg") no-repeat;
+    background-size: auto 100%;
+
+}
+

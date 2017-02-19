@@ -1,0 +1,18 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-ios-camera-permissions": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ar.com.phpmysql"
+        }
+    },
+    "dependent_plugins": {}
+}

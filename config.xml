@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="ar.com.phpmysql" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>phpmysql</name>
+    <description>
+        A blank PhoneGap app.
+    </description>
+    <author email="support@phonegap.com" href="http://phonegap.com">
+        PhoneGap Team
+    </author>
+    <content src="index.html" />
+	
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    <gap:plugin name="cordova-plugin-camera" />
+	<gap:plugin name="org.apache.cordova.statusbar"/>
+	
+    <access subdomains="false" uri="*" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
+	
+	
+	
+	
+    <platform name="ios">
+        <config-file parent="CFBundleURLTypes" target="*-Info.plist">
+            <array>
+                <dict>
+                    <key>Privacy - Camera Usage Description </key>
+                    <string>$(PRODUCT_NAME) camera use</string>
+                    <key>NSCameraUsageDescription</key>
+                    <string />
+                    <key>NSPhotoLibraryUsageDescription</key>
+                    <string />
+                </dict>
+            </array>
+        </config-file>
+		
+	<allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <!--preference name="StatusBarBackgroundColor" value="#000000" /-->
+		
+    </platform>
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="http://api.phonegap.com/1.0/file" />
+    <feature name="http://api.phonegap.com/1.0/camera" />
+    <plugin name="cordova-plugin-ios-camera-permissions" spec="~1.0.4" />
+</widget>

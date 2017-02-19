@@ -1,0 +1,38 @@
+<html>
+<head>
+ <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
+ <title>Camara</title>
+ 
+ <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+ <!--script src="//code.jquery.com/jquery-1.10.2.min.js"></script-->
+ <script src="js/jquery.js"></script>
+ <script src="js/jquery.mobile-1.4.5.min.js"></script>
+ <script src="cordova.js"></script> 
+  <script src="js/camera.js"></script> 
+   <link rel="stylesheet" href="css/sweetalert.css">
+ <script src="js/sweetalert.min.js"></script>
+
+</head>
+<body>
+
+  <div role="main" class="ui-content">
+	<a id = "tomarfoto" class="ui-btn ui-btn-a" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true" onclick="capturePhoto()">Tomar una Foto</a>
+	<button  id = "galeria" class="ui-btn ui-btn-c" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true" onclick="getImage()">Galería</button>
+	
+	
+	<button  id = "galeria" class="ui-btn ui-btn-c" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true" href="index_login.html">Galería</button>
+	
+
+	<center><img style="display:none;width:70%;height:70%;" id="smallImage" src="" /></center>
+	<button id = "subirfoto"  style="display:none;" onclick="uploadPhotoPreview()" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Subir Imagen</button>
+
+
+
+  <a href="feed.html" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Volver</a>
+	 
+	<!--button  onclick="test()" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button-->
+  <!--center><img style="display:none;width:50%;height:50%;" id="largeImage" src="" /></center-->
+	</div>
+	
+</body>
+</html>

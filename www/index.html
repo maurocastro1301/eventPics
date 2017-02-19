@@ -1,0 +1,119 @@
+<html>
+<head>
+ <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
+ 
+ <meta http-equiv="Content-Security-Policy" 
+         content="default-src *; 
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval'; 
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';">
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ 
+ <title>Login</title>
+ 
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="css/sweetalert.css">
+<link rel="stylesheet" href="css/index.css">
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script src="js/index.js"></script>
+<script src="cordova.js"></script> 
+ <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+ 
+</head>
+<body>
+<div data-role="page" id="page-signin"> 
+    <!--div data-role="header"  data-position="fixed">
+      <a onclick="Fedd()" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+      <a onclick="cameraPage()" data-icon="camera" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+        <h1>INGRESAR</h1>
+    </div--><!-- /header -->
+    <div role="main" class="ui-content">
+        <!--h3>Sign In</h3-->
+        <img src="images/logo600.png" class="logo" alt="Smiley face" align="middle">
+		 <form id="form1">
+        <div data-role="fieldcontainer">
+			<label for="txtEmail"> </label>
+			<input data-wrapper-class="ui-custom" type="email" name="txtEmail" id="email" value="" placeholder="Correo Electrónico">
+         </div>
+        <div data-role="fieldcontainer">
+			<label for="txtPassword"> </label>			
+			<input data-wrapper-class="ui-custom" type="password" name="txtPassword" id="password" value="" placeholder="Contraseña" >
+        </div>
+		 <button type="submit" class="loginButton" id="submit">Login</button >
+		 </form> 
+   
+    </div>
+
+<!--Footer-->
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar" data-iconpos="bottom" >
+
+
+<!--fieldset class="ui-grid-a">
+<div  data-inline="true" class="ui-block-a"><p  style="font-size: 12px;float:right">¿No tienes una Cuenta?</p></div>
+<div data-inline="true" class="ui-block-b"><a href="#page-register" style="font-size: 12px;float:left;border:none;box-shadow: none;">Regístrate</a></div>
+</fieldset-->
+
+<p style="font-size: 12px;text-align: center;">¿No tienes una Cuenta?  <a style="font-size: 12px;" href="#page-register">Regístrate</a></p>
+
+
+</div>
+</div><!-- /footer -->
+
+
+</div>
+
+<div data-role="page" id="page-event">
+     <form id="form_event">
+    <div data-role="header" data-theme="c" data-position="fixed">
+      <a href="#page-signin" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+        <h1>INGRESAR EVENTO</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <h3>Unite a evento existente...</h3>
+        <div data-role="fieldcontainer">
+			<label for="event_txt"> </label>
+			<input type="text" name="event_txt" data-wrapper-class="ui-custom" id="event_txt" value="" style="text-transform: uppercase;text-align: center;color:blue" placeholder="Código de Evento">
+         </div>
+		 <button type="submit" class="loginButton" id="event_submit">Unirse</button >
+    </div>
+      </form>  
+</div>
+
+
+<div data-role="page" id="page-register">
+  <div data-role="header" data-position="fixed">
+      <a href="#page-signin" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+        <h1>Registo</h1>
+    </div><!-- /header -->
+<div role="main" class="ui-content">
+
+<form id="form_register">
+<div data-role="fieldcontainer"> 
+ <label for="name_register"> </label>
+<input id="name_register" data-wrapper-class="ui-custom" name ="name_register" type="text" placeholder="Nombre"/>
+</div>
+ <div data-role="fieldcontainer">
+      <label for="surname_register"></label>
+<input id="surname_register" data-wrapper-class="ui-custom" name = "surname_register" type="text" placeholder="Apellido" />
+</div>
+ <div data-role="fieldcontainer">
+      <label for="email_register"></label>
+<input id="email_register" data-wrapper-class="ui-custom" name = "email_register" type="email" placeholder="Correo Electrónico" />
+</div>
+ <div data-role="fieldcontainer">
+      <label for="password_register"></label>
+<input id="password_register" data-wrapper-class="ui-custom" name = "password_register" type="password" placeholder="Contraseña" />
+</div>
+ <div data-role="fieldcontainer">
+</form>
+
+<button type="submit" class="loginButton" id="signup">Crear Cuenta</button >
+</div>
+
+</div>
+
+</body>
+</html>
