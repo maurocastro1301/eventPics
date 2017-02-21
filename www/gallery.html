@@ -224,10 +224,23 @@ $.mobile.loading("hide");
 
 <div data-role="page" id="page-bio" style="background-color:white;">
 <div data-role="header"  data-position="fixed" style="height: 3em">
-    <a id ="camera_button" class="flat-btn" data-shadow="false"></a>
-    <!--a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a-->
+    <!--a id ="camera_button" class="flat-btn" data-shadow="false"></a-->
+    <a id="leftpanel_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
     <h1>BIO</h1>
 </div>
+<a href="#leftpanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
+<div class="instagram-content">
+     <div class="row photos-wrap">
+        <div id ="imgBio" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="photo-box">
+                <div class="image-wrap">
+                     <img id="bio-img" src="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div>
 <section id="one" class="wrapper style2 special">
@@ -251,6 +264,17 @@ $.mobile.loading("hide");
 </ul>
 </div>
 </div><!-- /footer -->
+
+
+<!-- leftpanel  -->
+<div data-role="panel" id="leftpanel" data-position="left" data-display="overlay">
+
+      <h3>Left Panel: Overlay</h3>
+      <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+      <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+
+</div><!-- /leftpanel -->
 
 </div> <!--PAGE-BIO-->
 

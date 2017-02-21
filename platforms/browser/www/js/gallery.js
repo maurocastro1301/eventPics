@@ -36,6 +36,8 @@ $(window).load(function() {
             });
         });//$.getJSON(url, function(result)
 
+
+document.getElementById('bio-img').src= localStorage.event_bio_img;
 $("#bio-content").append(localStorage.event_bio_html);
 
 var countDownDate = new Date(localStorage.event_date).getTime();
@@ -187,6 +189,10 @@ window.location.href = "#page-feed";
 
  $(document).on('click', '#button_page1', function() {
 window.location.href = "#page-bio";
+ });
+
+ $(document).on('click', '#leftpanel_button', function() {
+window.location.href = "#leftpanel";
  });
 
 $(document).on('click', '#button_page2', function() {

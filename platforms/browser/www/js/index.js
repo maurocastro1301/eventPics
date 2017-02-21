@@ -8,13 +8,10 @@
 
         StatusBar.overlaysWebView(false);
        // swal("onDeviceReady", "", "success");
-    }  
+    }
 
 
       });
-
- 
-
 
 
 function cameraPage() {
@@ -39,7 +36,7 @@ $('#form1').validate({
         txtPassword: {
             required: true
         }
-        
+
     },
     messages: {
         txtEmail: {
@@ -49,13 +46,13 @@ $('#form1').validate({
         txtPassword: {
             required: "Ingrese una Contraseña."
         }
-        
+
     },
     errorPlacement: function (error, element) {
         error.appendTo(element.parent().prev());
      // document.getElementById("submit").className="loginButton";
      // alert("ENTRO");
-        
+
     },
 submitHandler: function (form) {
 var email=$("#email").val();
@@ -103,7 +100,7 @@ swal({
 },
 function(inputValue){
   if (inputValue === false){
-  
+
   document.getElementById('email').value="";
 document.getElementById('password').value="";
 clear_local_storage();
@@ -149,7 +146,7 @@ $('#form_register').validate({
         password_register: {
             required: true
         }
-        
+
     },
     messages: {
         email_register: {
@@ -165,14 +162,14 @@ $('#form_register').validate({
         surname_register:{
             required: "Ingrese un Apellido."
         }
-        
+
     },
     errorPlacement: function (error, element) {
         error.appendTo(element.parent().prev());
 
     },
     submitHandler: function (form) {
- 
+
 
 var name=$("#name_register").val();
 var surname=$("#surname_register").val();
@@ -225,14 +222,14 @@ $('#form_event').validate({
         event_txt: {
             required: "Ingrese código del evento."
         }
-        
+
     },
     errorPlacement: function (error, element) {
         error.appendTo(element.parent().prev());
-        
+
     },
     submitHandler: function (form) {
- 
+
 var event_code=$("#event_txt").val();
 
 var dataString="event_code="+event_code+"&event=";
@@ -274,7 +271,7 @@ window.location.href = "gallery.html";
 });
 
 function event (inputValue){
-    
+
 //var event_code=$("#event_txt").val();
 var event_code= inputValue;
 
@@ -307,6 +304,7 @@ localStorage.event_id=obj[0].id;
 localStorage.event_code=obj[0].code;
 localStorage.event_date=obj[0].date;
 localStorage.event_bio_html=obj[0].bio_html;
+localStorage.event_bio_img=obj[0].bio_img;
 window.location.href = "gallery.html";
 }
 }
