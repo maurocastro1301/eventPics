@@ -17,7 +17,7 @@
        under the License.
  */
 
-package ar.com.phpmysql;
+package ar.com.eventPics;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

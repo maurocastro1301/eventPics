@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="css/sweetalert.css">
  <script src="js/sweetalert.min.js"></script>
 
-<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"> 
-<link rel="stylesheet" href="css/bio.css"> 
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="css/bio.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
@@ -28,31 +28,31 @@
     margin-bottom: 0%;
     overflow: hidden;
     list-style: none;
-    
+
 }
 
 .home.w5 {
-     width: 33.3%; 
+     width: 33.3%;
      border: 3px solid white;
-     
+
 }
 
 .ui-grid-b img {
- 
+
   height: 100%;
   min-width: 100%;
   left: 50%;
   position: relative;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
 }
 
 .home.w5 img{
- 
+
   height: 100%;
   min-width: 100%;
   left: 50%;
   position: relative;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
 }
 
 .loader {
@@ -63,7 +63,7 @@
 	height: 100%;
 	z-index: 9999;
 	background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
-}   
+}
 
 
 
@@ -71,7 +71,7 @@
  width:  32px;
     height: 32px;
     border: 0;
-    margin: 4px;   
+    margin: 4px;
   	background: url("images/camera_20.svg") no-repeat;
     background-size: auto 100%;
 
@@ -79,7 +79,7 @@
 
 .ui-btn.buttonCustom{
   width:  100%;
-    height: 65px;  
+    height: 65px;
     background: url("images/camera_20.svg") no-repeat;
     background-size: 50px 50px;
     background-repeat: no-repeat;
@@ -89,18 +89,18 @@
 
 .countdown{
    text-align: center;
-  font-size: 40px;   
+  font-size: 40px;
 }
 
 </style>
 
 
 <script type="text/javascript">
-              
- 
 
 
-   
+
+
+
  function getImage() {
  navigator.camera.getPicture(uploadPhoto, function(message) {
  //alert('get picture failed');
@@ -113,39 +113,39 @@
 
 
 function capturePhoto() {
-	
+
       // Take picture using device camera and retrieve image as base64-encoded string
-	  
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, { 
-          targetWidth: 1200, 
+
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+          targetWidth: 1200,
         targetHeight: 1200,
          allowEdit : true,
-          quality: 90, 
+          quality: 90,
           correctOrientation: 1
         });
-	 
+
     }
 
 
-  
+
 
 function onFail(message) {
       //alert('Failed because: ' + message);
      // swal("Oops...", message, "error");
     }
 
-	
-	
+
+
 function uploadPhotoPreview() {
 
- 
+
  $.mobile.loading( "show", {
             text: "Procesando",
             textVisible: true,
             theme: "a",
             html: ""
     });
-	
+
 var imageURI = document.getElementById("smallImage").src;
 
 //document.getElementById('smallImage').style.display = 'none';
@@ -169,7 +169,7 @@ var ft = new FileTransfer();
  ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php?event_id="+localStorage.event_id+"&user_id="+localStorage.user_id+"&event_code="+localStorage.event_code, function(result){
  console.log(JSON.stringify(result));
   $.mobile.loading("hide");
-  
+
 swal("Foto Subida Correctamente", "", "success");
 window.location.href = "#page-feed";
 $("#reload_button").click();
@@ -179,7 +179,7 @@ $("#reload_button").click();
 
  console.log(JSON.stringify(error));
  }, options);
-} 
+}
 
 /*
 function uploadPhoto(imageURI) {
@@ -190,7 +190,7 @@ $.mobile.loading( "show", {
             theme: "a",
             html: ""
     });
- 
+
  var options = new FileUploadOptions();
  options.fileKey = "file";
  options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
@@ -210,7 +210,7 @@ ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php?event_id=
 swal("Foto Subida Correctamente", "", "success");
  }, function(error){
 $.mobile.loading("hide");
- 
+
  console.log(JSON.stringify(error));
  }, options);
  }
@@ -223,13 +223,20 @@ $.mobile.loading("hide");
 <body style="background-color:white;">
 
 <div data-role="page" id="page-bio" style="background-color:white;">
-<div data-role="header"  data-position="fixed" style="height: 3em">        
+<div data-role="header"  data-position="fixed" style="height: 3em">
     <a id ="camera_button" class="flat-btn" data-shadow="false"></a>
     <!--a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a-->
     <h1>BIO</h1>
 </div>
 
-<div class="countdown" id="countdown"></div>
+<div>
+<section id="one" class="wrapper style2 special">
+  <h2 id="countdown"></h2>
+</section>
+</div>
+
+
+<!--div class="countdown" id="countdown"></div-->
 <div id="bio-content"></div>
 
 <!--Footer-->
@@ -239,13 +246,13 @@ $.mobile.loading("hide");
 
 <li><button id="button_page1" data-icon="home" style = "border-top: 3px solid black">Bio</button></li>
 <li><button id="button_page2" data-icon="home">Galeria</button></li>
-<li><button id="button_page4" data-icon="home" >Guest Book</button></li>
+<li><button id="button_page3" data-icon="home" >Guest Book</button></li>
 <li><button  class="buttonCustom"  id ="camera_button"></button></li>
 </ul>
 </div>
 </div><!-- /footer -->
 
-</div> <!--PAGE-BIO-->    
+</div> <!--PAGE-BIO-->
 
 <div data-role="page"  id="page-feed" style="background-color:white;">
     <div data-role="header"  data-position="fixed" style="height: 3em">
@@ -256,8 +263,7 @@ $.mobile.loading("hide");
     </div>
 
 
-<div id="grid">
-</div><!-- /grid-b -->
+<div id="grid"></div><!-- /grid-b -->
 
 
 <!--Footer-->
@@ -267,8 +273,7 @@ $.mobile.loading("hide");
 
 <li><button id="button_page1" data-icon="home" >Bio</button></li>
 <li><button id="button_page2" data-icon="home" style = "border-top: 3px solid black">Galeria</button></li>
-
-<li><button id="button_page4" data-icon="home" >Guest Book</button></li>
+<li><button id="button_page3" data-icon="home" >Guest Book</button></li>
 <li><button  class="buttonCustom"  id ="camera_button"></button></li>
 </ul>
 </div>
@@ -280,15 +285,10 @@ $.mobile.loading("hide");
 <h1>Pagina 2</h1>
 </div>
 
-
 <h1>First tab contents</h1>
 
 <button id ="foto_test" >FOTO</button>
 <button id ="test" >Test</button>
-
-
-	
-
 
 <div data-role="footer" data-position="fixed" style="height: 4em">
 <div data-role="navbar" data-iconpos="bottom" >
@@ -306,7 +306,7 @@ $.mobile.loading("hide");
 </div>
 </div>
 
-</div> 
+</div>
 
 
 <div data-role="page" id="page-content" style="background-color:white;" >
@@ -315,10 +315,10 @@ $.mobile.loading("hide");
 <h1>preview</h1>
 </div>
 <div class="loader"></div>
-<div class="instagram-content">            
+<div class="instagram-content">
      <div class="row photos-wrap">
         <div id ="contenido" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-	        
+
             <!--div class="photo-box">
                 <div class="image-wrap">
                      <div class="user">Mauro castro</div>
@@ -328,10 +328,48 @@ $.mobile.loading("hide");
                     <div class="dateCustom">fecha</div>
                 </div>
             </div-->
-        </div> 
+        </div>
     </div>
 </div>
-</div> 
+</div>
+
+
+<div data-role="page" id="page-guestbook" style="background-color:white;" >
+<div data-role="header"  data-position="fixed">
+    <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+<h1>Guest Book</h1>
+</div>
+<div role="main" class="ui-content">
+  <form>
+      <input data-type="search" id="divOfPs-input">
+  </form>
+  <div class="elements" data-filter="true" data-input="#divOfPs-input">
+  <p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+  <p><strong>tags</strong> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+  <p><strong>Tags</strong> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores </p>
+  <p><strong>are</strong> et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est</p>
+  <p><strong>Filterable</strong> Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur</p>
+  <p><strong>Mauro Castro:</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+  </div>
+
+</div>
+
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar" data-iconpos="bottom" >
+<ul>
+
+<li><button id="button_page1" data-icon="home" >Bio</button></li>
+<li><button id="button_page2" data-icon="home" >Galeria</button></li>
+<li><button id="button_page3" data-icon="home" style = "border-top: 3px solid black">Guest Book</button></li>
+<li><button  class="buttonCustom"  id ="camera_button"></button></li>
+</ul>
+</div>
+</div><!-- /footer -->
+
+</div>
+
+
+
 
 <div data-role="page" id="page-camera" >
 <div data-role="header"  data-position="fixed">
@@ -342,25 +380,25 @@ $.mobile.loading("hide");
   <div role="main" class="ui-content">
 
 
-<div class="instagram-content">            
+<div class="instagram-content">
      <div class="row photos-wrap">
         <div id ="contenido" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-	        
+
             <div class="photo-box">
                 <div class="image-wrap">
-                   <img id="smallImage"  src="">    
-                     
-                    
+                   <img id="smallImage"  src="">
+
+
                 </div>
 
-                
-                
+
+
 
             </div>
-        </div> 
+        </div>
     </div>
 </div>
- 
+
 	<!--center><img style="display:none;width:70%;height:40%; display:inline-block;vertical-align:top;" id="smallImage" src="" /></center-->
 	<button id = "subirfoto"  onclick="uploadPhotoPreview()" class="ui-btn ui-btn-b" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Subir Imagen</button>
     <a href="#page-feed" class="ui-btn ui-btn-b loginButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Cancelar</a>
