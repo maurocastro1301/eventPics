@@ -37,6 +37,7 @@ $(window).load(function() {
         });//$.getJSON(url, function(result)
 
 
+
 document.getElementById('bio-img').src= localStorage.event_bio_img;
 $("#bio-content").append(localStorage.event_bio_html);
 
@@ -70,6 +71,19 @@ var x = setInterval(function() {
 
 
     });
+
+		$(document).on("pageshow","#page-feed",function(){
+		   document.getElementById('title_feed').innerHTML = localStorage.event_title;
+		});
+
+		$(document).on("pageshow","#page-bio",function(){
+		   document.getElementById('title_bio').innerHTML = localStorage.event_title;
+		});
+
+		$(document).on("pageshow","#page-guestbook",function(){
+		   document.getElementById('title_guestbook').innerHTML = localStorage.event_title;
+		});
+
 
 function reply_click(clicked_id)
 {
@@ -192,7 +206,8 @@ window.location.href = "#page-bio";
  });
 
  $(document).on('click', '#leftpanel_button', function() {
-window.location.href = "#leftpanel";
+//window.location.href = "#leftpanel";
+
  });
 
 $(document).on('click', '#button_page2', function() {

@@ -305,6 +305,7 @@ localStorage.event_code=obj[0].code;
 localStorage.event_date=obj[0].date;
 localStorage.event_bio_html=obj[0].bio_html;
 localStorage.event_bio_img=obj[0].bio_img;
+localStorage.event_title=obj[0].title;
 window.location.href = "gallery.html";
 }
 }
