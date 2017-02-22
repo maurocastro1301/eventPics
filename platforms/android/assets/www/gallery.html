@@ -225,7 +225,7 @@ $.mobile.loading("hide");
 <div data-role="page" id="page-bio" style="background-color:white;">
 <div data-role="header"  data-position="fixed" style="height: 3em">
     <!--a id ="camera_button" class="flat-btn" data-shadow="false"></a-->
-    <a href="#leftpanel" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
+    <a href="#leftpanel" id="leftpanel_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
     <h1 id="title_bio"></h1>
 </div>
 
@@ -269,12 +269,11 @@ $.mobile.loading("hide");
 <!-- leftpanel  -->
 <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay">
 
-      <h3>Left Panel: Overlay</h3>
-      <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-      <a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
-
-      <a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a>
+      <h3 id="title_leftpanel"></h3>
+      <!--p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p-->
+      <!--a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a-->
+      <a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a>
 
 </div><!-- /leftpanel -->
 
@@ -284,7 +283,7 @@ $.mobile.loading("hide");
     <div data-role="header"  data-position="fixed" style="height: 3em">
         <!--a onclick="locationPage()" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-icon-cameraCustom"  data-transition="slide" data-direction="reverse"></a-->
         <!--a id ="camera_button" class="flat-btn" data-shadow="false"></a-->
-        <a href="#leftpanel" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
+        <a href="#leftpanel_feed" id="leftpanel_button_feed" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
         <a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
         <h1 id="title_feed"></h1>
     </div>
@@ -305,35 +304,18 @@ $.mobile.loading("hide");
 </ul>
 </div>
 </div><!-- /footer -->
+
+<!-- leftpanel  -->
+<div data-role="panel" id="leftpanel_feed" data-position="left" data-display="overlay">
+
+      <h3 id="title_leftpanel_feed"></h3>
+      <!--p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p-->
+      <!--a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a-->
+      <a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a>
+
+</div><!-- /leftpanel -->
 </div> <!-- /page-feed -->
-
-<div data-role="page" id="page2">
-<div data-role="header"  data-position="fixed">
-<h1>Pagina 2</h1>
-</div>
-
-<h1>First tab contents</h1>
-
-<button id ="foto_test" >FOTO</button>
-<button id ="test" >Test</button>
-
-<div data-role="footer" data-position="fixed" style="height: 4em">
-<div data-role="navbar" data-iconpos="bottom" >
-<!--li><a href="#page-feed" data-icon="star" class="ui-btn-active ui-state-persist">Favs</a></li>
-<li><a href="#page2" data-icon="grid">Summary</a></li>
-<li><a href="#" data-icon="gear">Setup</a></li>
-<li><a href="#" data-icon="gear">Setup</a></li-->
-<ul>
-<li><button id="button_page1" data-icon="home">One</button></li>
-<li><button id="button_page2" data-icon="home" style = "border-top: 3px solid black">Two</button></li>
-<li><button id="button_page3" data-icon="home" >3</button></li>
-<li><button id="button_page4" data-icon="home" >4</button></li>
-<li><button id="button_page4" data-icon="home" >5</button></li>
-</ul>
-</div>
-</div>
-
-</div>
 
 
 <div data-role="page" id="page-content" style="background-color:white;" >
@@ -363,7 +345,7 @@ $.mobile.loading("hide");
 
 <div data-role="page" id="page-guestbook" style="background-color:white;" >
 <div data-role="header"  data-position="fixed">
-    <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+    <a href="#leftpanel_guestbook" id="leftpanel_button_guestbook" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
   <h1 id="title_guestbook"></h1>
 </div>
 <div role="main" class="ui-content">
@@ -392,6 +374,18 @@ $.mobile.loading("hide");
 </ul>
 </div>
 </div><!-- /footer -->
+<!-- leftpanel  -->
+
+<div data-role="panel" id="leftpanel_guestbook" data-position="left" data-display="overlay">
+
+      <h3 id="title_leftpanel_guestbook"></h3>
+      <!--p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p-->
+      <!--a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a-->
+      <a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a>
+
+</div><!-- /leftpanel -->
+
 
 </div>
 
@@ -414,13 +408,7 @@ $.mobile.loading("hide");
             <div class="photo-box">
                 <div class="image-wrap">
                    <img id="smallImage"  src="">
-
-
                 </div>
-
-
-
-
             </div>
         </div>
     </div>

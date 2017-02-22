@@ -11,7 +11,11 @@ $(window).load(function() {
 
         document.addEventListener("deviceready",onDeviceReady,false);
 
+
     function onDeviceReady() {
+
+			
+
        pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
         StatusBar.overlaysWebView(false);
@@ -206,9 +210,36 @@ window.location.href = "#page-bio";
  });
 
  $(document).on('click', '#leftpanel_button', function() {
-//window.location.href = "#leftpanel";
-
+	var bio_title = document.getElementById("title_leftpanel");
+	bio_title.innerHTML = localStorage.user_name + " " + localStorage.user_surname;
  });
+
+ $(document).on('click', '#leftpanel_button_guestbook', function() {
+	var guestbook_title = document.getElementById("title_leftpanel_guestbook");
+	guestbook_title.innerHTML = localStorage.user_name + " " + localStorage.user_surname;
+ });
+
+ $(document).on('click', '#leftpanel_button_feed', function() {
+ var feed_title = document.getElementById("title_leftpanel_feed");
+ feed_title.innerHTML = localStorage.user_name + " " + localStorage.user_surname;
+ });
+
+  $(document).on('click', '#cerrar_sesion', function() {
+		localStorage.login="false";
+		localStorage.email_user="";
+		localStorage.user_id="";
+		localStorage.user_name="";
+		localStorage.user_surname="";
+		localStorage.event_id="";
+		localStorage.event_code="";
+		localStorage.event_date="";
+		localStorage.event_bio_html="";
+		localStorage.event_bio_img="";
+		localStorage.event_title="";
+ 	window.location.href = "index.html";
+
+  });
+
 
 $(document).on('click', '#button_page2', function() {
 window.location.href = "#page-feed";
