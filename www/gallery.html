@@ -273,8 +273,10 @@ $.mobile.loading("hide");
       <!--p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
       <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p-->
       <!--a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a-->
-      <a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a>
-
+      <!--a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a-->
+      <ul data-role="listview" data-inset="true">
+      <li data-icon="power" id="cerrar_sesion"><a href="#">cerrar Sesion</a></li>
+      </ul>
 </div><!-- /leftpanel -->
 
 </div> <!--PAGE-BIO-->
@@ -342,10 +344,30 @@ $.mobile.loading("hide");
 </div>
 </div>
 
+<div data-role="page" id="page-guestbook-add" style="background-color:white;" >
+
+<div data-role="header"  data-position="fixed">
+    <a href="#page-guestbook" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+<h1>Agregar</h1>
+</div>
+<div role="main" class="ui-content">
+  <div data-role="fieldcontainer">
+
+    <textarea cols="40" rows="12" name="comentario_txt" id="comentario_txt"></textarea>
+
+    <a id ="guardar_comentario" class="ui-btn ui-btn-b loginButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Guardar</a>
+  </div>
+
+</div>
+
+</div>
+
+
 
 <div data-role="page" id="page-guestbook" style="background-color:white;" >
 <div data-role="header"  data-position="fixed">
     <a href="#leftpanel_guestbook" id="leftpanel_button_guestbook" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
+    <a href="#page-guestbook-add" id="guestbook-add" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-comment ui-btn-icon-notext ui-btn-inline"></a>
   <h1 id="title_guestbook"></h1>
 </div>
 <div role="main" class="ui-content">

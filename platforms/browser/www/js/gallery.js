@@ -14,8 +14,6 @@ $(window).load(function() {
 
     function onDeviceReady() {
 
-			
-
        pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
         StatusBar.overlaysWebView(false);
@@ -283,3 +281,45 @@ navigator.camera.getPicture(onPhotoURISuccess, onFail, {
 
 
     }
+
+		$(document).on('click', '#guardar_comentario', function() {
+			var comentario_guestbook=$("#comentario_txt").val();
+			if($.trim(comentario_guestbook).length>0){
+
+				var dataString="comentario_guestbook="+comentario_guestbook+"&user_id="+localStorage.user_id+"&guestbook=";
+
+alert("entro");
+				$.ajax({
+				type: "POST",
+				url: "http://mncphonegap.esy.es/phpmysql/guestbook.php",
+				data: dataString,
+				crossDomain: true,
+				cache: false,
+				beforeSend: function(){
+					$.mobile.loading( "show", {
+				             text: "Procesando",
+				             textVisible: true,
+				             theme: "a",
+				             html: ""
+				     });
+				 },
+				success: function(data){
+				if(data=="success")
+				{
+					$.mobile.loading("hide");
+				swal("Comentario Guardado Correctamente", "", "success");
+				window.location.href = "#page-guestbook";
+				}else{
+					$.mobile.loading("hide");
+				swal("Oops...", "Surgió un error al intentar guardar el Comentario", "error");
+				}
+			}
+
+				});
+
+			}else{
+				swal("Oops...", "Debe Ingresar un comentario", "error");
+			}
+
+
+		});
