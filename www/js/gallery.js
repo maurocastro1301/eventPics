@@ -3,10 +3,11 @@ $(window).load(function() {
 	$(".loader").fadeOut("slow");
 
 })
-    var maxId;
-    var contador = 1;
+    var guestbook_maxId=0;
+		var maxId;
     var idPhoto;
 
+/*Inicio Document ready*/
     $(document).ready(function() {
 
         document.addEventListener("deviceready",onDeviceReady,false);
@@ -20,59 +21,75 @@ $(window).load(function() {
 
     }
 
-        var url = "http://mncphonegap.esy.es/phpmysql/photo.php?event_id="+localStorage.event_id;
-        /*var url = "http://mncphonegap.esy.es/phpmysql/photo.php";*/
-        $.getJSON(url, function(result) {
-            console.log(result);
-            $.each(result, function(i, field) {
-                var id = field.id;
-                var url = field.url;
-                var thumbnail = field.thumbnail;
-                /*var user  = "Mauro Castro";
-				var fecha = "September 16, 2014";
-				var descripcion = "Fantastic Architecture #architecture";*/
-
-                maxId  = field.id;
-
- $("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
-            });
-        });//$.getJSON(url, function(result)
-
-
-
-document.getElementById('bio-img').src= localStorage.event_bio_img;
-$("#bio-content").append(localStorage.event_bio_html);
-
-var countDownDate = new Date(localStorage.event_date).getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-    // Get todays date and time
-    var now = new Date().getTime();
-
-    // Find the distance between now an the count down date
-    var distance = countDownDate - now;
-
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Output the result in an element with id="demo"
-    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
-    // If the count down is over, write some text
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerHTML = "A disfrutar!!";
-    }
-}, 1000);
-
+	countdown_fill();
+		get_photos();
+		guestbook_select();
 
     });
+		/*Fin document ready*/
+
+
+function get_photos(){
+	var url = "http://mncphonegap.esy.es/phpmysql/photo.php?event_id="+localStorage.event_id;
+	/*var url = "http://mncphonegap.esy.es/phpmysql/photo.php";*/
+	$.getJSON(url, function(result) {
+			console.log(result);
+			$.each(result, function(i, field) {
+					var id = field.id;
+					var url = field.url;
+					var thumbnail = field.thumbnail;
+					maxId  = field.id;
+
+$("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
+			});
+	});
+}
+
+		function countdown_fill(){
+			document.getElementById('bio-img').src= localStorage.event_bio_img;
+			$("#bio-content").append(localStorage.event_bio_html);
+
+			var countDownDate = new Date(localStorage.event_date).getTime();
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+			    // Get todays date and time
+			    var now = new Date().getTime();
+			    // Find the distance between now an the count down date
+			    var distance = countDownDate - now;
+			    // Time calculations for days, hours, minutes and seconds
+			    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			    // Output the result in an element with id="demo"
+			    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+			    + minutes + "m " + seconds + "s ";
+			    // If the count down is over, write some text
+			    if (distance < 0) {
+			        clearInterval(x);
+			        document.getElementById("countdown").innerHTML = "A disfrutar!!";
+			    }
+			}, 1000);
+		}
+
+		function guestbook_select(){
+
+			var url = "http://mncphonegap.esy.es/phpmysql/guestbook_select.php?event_id="+localStorage.event_id+"&max_id="+guestbook_maxId;
+			$.getJSON(url, function(result) {
+					console.log(result);
+					$.each(result, function(i, field) {
+						var guestbook_id = field.id;
+							var guestbook_date = field.date;
+							var guestbook_comment = field.comment;
+							var guestbook_user_name = field.name;
+							var guestbook_user_surname = field.surname;
+							guestbook_maxId  = guestbook_id;
+
+$("#guestbook_div").prepend("<p><strong>"+guestbook_user_name+" "+guestbook_user_surname+": </strong>"+ guestbook_comment+" ("+guestbook_date+")</p>");
+					});
+			});
+
+		}
 
 		$(document).on("pageshow","#page-feed",function(){
 		   document.getElementById('title_feed').innerHTML = localStorage.event_title;
@@ -113,11 +130,11 @@ $(document).on('pagebeforeshow', '#page-content', function(){
 
  document.getElementById("contenido").innerHTML= "<div class='photo-box'>"+
                 "<div class='image-wrap'>"+
-                     "<div class='user'>"+ user + " </div>"+
+                     "<div class='user'>Creado por: "+ user + " </div>"+
                      "<center><img src='"+ url + "'></center>"+
                 "</div>"+
                 "<div class='description'>"+ descripcion+
-                    "<div class='dateCustom'>"+ fecha +"</div>"+
+                    "<div class='dateCustom'>Publicado: "+ fecha +"</div>"+
                 "</div>"+
             "</div>";
 
@@ -127,69 +144,30 @@ $(document).on('pagebeforeshow', '#page-content', function(){
 
 
 
-	function reload_force(){
-            	var url = "images/1484754084377.jpg.jpg";
-                var user  = "FOTO RELOAD";
-				var fecha = "September 16, 2014";
-				var descripcion = "Fantastic Architecture #architecture";
-            $("#listview").prepend("<li><div class='photo-box'><div class='image-wrap'><div class='user'>"+ user + " </div><img src='"+ url + "'></div><div class='description'>"+ descripcion+ " <div class='dateCustom'>"+ fecha +"</div></div></div></li>");
-
-	}
-
 $(document).on('click', '#reload_button', function() {
-    //alert("reoload_button");
-
-/*var cw1 = $('.home.w5').width();
-alert(cw1);
-$('.home').css({
-    'height': cw1 + 'px'
-});*/
-
-        var url = "http://mncphonegap.esy.es/phpmysql/photoId.php?photo_id="+ maxId+"&event_id="+localStorage.event_id;
-        $.getJSON(url, function(result) {
-            console.log(result);
-            $.each(result, function(i, field) {
-
-                var id = field.id;
-                var url = field.url;
-                var thumbnail = field.thumbnail;
-
-                maxId  = field.id;
-
- $("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
-
-
-
-            });
-        });
-
+reload_photo();
  });
 
-function reload(){
-        var url = "http://mncphonegap.esy.es/phpmysql/photoId.php?photo_id="+ maxId+"&event_id="+localStorage.event_id;
-//        var url = "http://mncphonegap.esy.es/phpmysql/photo.php";
 
-        $.getJSON(url, function(result) {
-            console.log(result);
-            $.each(result, function(i, field) {
+ $(document).on('click', '#reload_button_guestbook', function() {
 
-      var id = field.id;
-                var url = field.url;
-                var thumbnail = field.thumbnail;
-
-                maxId  = field.id;
-
- $("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
-
-var cw = $('.home.w5').width();
-$('.home').css({
-    'height': cw + 'px'
-});
+ guestbook_select();
+  });
 
 
+function reload_photo(){
+	var url = "http://mncphonegap.esy.es/phpmysql/photoId.php?photo_id="+ maxId+"&event_id="+localStorage.event_id;
+	$.getJSON(url, function(result) {
+			console.log(result);
+			$.each(result, function(i, field) {
+					var id = field.id;
+					var url = field.url;
+					var thumbnail = field.thumbnail;
+					maxId  = field.id;
+$("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
+			});
+	});
 
-            });
-        });
 	}
 
 
@@ -278,20 +256,19 @@ navigator.camera.getPicture(onPhotoURISuccess, onFail, {
 //	  document.getElementById('tomarfoto').style.display = 'none';
 //	  document.getElementById('galeria').style.display = 'none';
 	  document.getElementById('subirfoto').style.display = 'block';
-
-
     }
 
-		$(document).on('click', '#guardar_comentario', function() {
-			var comentario_guestbook=$("#comentario_txt").val();
-			if($.trim(comentario_guestbook).length>0){
+		$(document).on('click', '#guardar_mensaje', function() {
+			var mensaje_guestbook=encodeURIComponent($("#comentario_txt").val());
 
-				var dataString="comentario_guestbook="+comentario_guestbook+"&user_id="+localStorage.user_id+"&guestbook=";
+		//	mensaje_guestbook= encodeURIComponent(mensaje_guestbook);
 
-alert("entro");
+			if($.trim(mensaje_guestbook).length>0){
+				var dataString="mensaje_guestbook="+mensaje_guestbook+"&user_id="+localStorage.user_id+"&event_id="+localStorage.event_id+"&guestbook=";
+				
 				$.ajax({
 				type: "POST",
-				url: "http://mncphonegap.esy.es/phpmysql/guestbook.php",
+				url: "http://mncphonegap.esy.es/phpmysql/guestbook_insert.php",
 				data: dataString,
 				crossDomain: true,
 				cache: false,
@@ -307,19 +284,32 @@ alert("entro");
 				if(data=="success")
 				{
 					$.mobile.loading("hide");
-				swal("Comentario Guardado Correctamente", "", "success");
+				swal("Mensaje Guardado Correctamente", "", "success");
 				window.location.href = "#page-guestbook";
+				localStorage.guestbook_add="true";
+				document.getElementById('guestbook_add_button').href= "#";
+				guestbook_select();
 				}else{
 					$.mobile.loading("hide");
-				swal("Oops...", "Surgió un error al intentar guardar el Comentario", "error");
+				swal("Oops...", "Surgió un error al intentar guardar el Mensaje", "error");
 				}
 			}
 
 				});
 
 			}else{
-				swal("Oops...", "Debe Ingresar un comentario", "error");
+				swal("Oops...", "Debe Ingresar un Mensaje", "error");
 			}
 
 
 		});
+
+
+		$(document).on('click', '#guestbook_add_button', function() {
+		if (localStorage.guestbook_add == "true"){
+			swal("", "Ya ingreso un comentario", "warning");
+			//window.location.href = "#page-guestbook";
+		}else
+			window.location.href = "#page-guestbook-add";
+
+		 });

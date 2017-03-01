@@ -3,7 +3,8 @@
 <head>
 
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-eqiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.4.5.min.js"></script>
 
@@ -13,11 +14,8 @@
  <script src="js/sweetalert.min.js"></script>
 
 <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-<link rel="stylesheet" href="css/bio.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-
-
-
+<link rel="stylesheet" href="css/bio.css">
 
 
 <style>
@@ -65,8 +63,6 @@
 	background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
 
-
-
 .flat-btn {
  width:  32px;
     height: 32px;
@@ -91,6 +87,28 @@
    text-align: center;
   font-size: 40px;
 }
+
+
+.ui-page .ui-header {
+background-color: #47C1B8 !important;
+font-weight: bold;
+text-decoration: none;
+text-shadow: 0 0 0 !important;
+color: white;
+
+}
+
+
+.ui-btn.customButton {
+color: white;
+background: rgb(145, 200, 224);
+/*font-weight: bold;*/
+text-decoration: none;
+text-shadow: 0 0 0 !important;
+font-weight: 500;
+}
+
+textarea.ui-input-text { height: inherit !important}
 
 </style>
 
@@ -136,6 +154,17 @@ function onFail(message) {
 
 
 
+    function urlencode(str) {
+    str = escape(str);
+    str = str.replace('+', '%2B');
+  //  str = str.replace('%20', '+');
+    //str = str.replace('*', '%2A');
+//    str = str.replace('/', '%2F');
+  //  str = str.replace('@', '%40');
+  //  return str;
+    }
+
+
 function uploadPhotoPreview() {
 
 
@@ -150,31 +179,48 @@ var imageURI = document.getElementById("smallImage").src;
 
 //document.getElementById('smallImage').style.display = 'none';
 
-var d = new Date();
+var date = new Date();
 
 
+//var camera_text=encodeURIComponent($("#camera_txt").val());
+
+
+var camera_text=$("#camera_txt").val();
+//camera_text = urlencode(camera_text);
+
+
+//var des= "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen";
+//alert(camera_txt);
  var options = new FileUploadOptions();
  options.fileKey = "file";
 // options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
- options.fileName = d.getTime()+".jpg";
+ options.fileName = date.getTime()+".jpg";
  options.mimeType = "image/jpeg";
  console.log(options.fileName);
  var params = new Object();
- params.value1 = "test";
- params.value2 = "param";
+ params.description = camera_text;
+ params.event_id = localStorage.event_id;
+ params.user_id= localStorage.user_id;
+ params.event_code= localStorage.event_code;
  options.params = params;
  options.chunkedMode = false;
 
-var ft = new FileTransfer();
- ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_new.php?event_id="+localStorage.event_id+"&user_id="+localStorage.user_id+"&event_code="+localStorage.event_code, function(result){
- console.log(JSON.stringify(result));
-  $.mobile.loading("hide");
 
+
+var ft = new FileTransfer();
+// ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_photo.php?event_id="+localStorage.event_id+"&user_id="+localStorage.user_id+"&event_code="+localStorage.event_code, function(result){
+ft.upload(imageURI, "http://mncphonegap.esy.es/phpmysql/upload_photo.php", function(result){
+ console.log(JSON.stringify(result));
+$.mobile.loading("hide");
 swal("Foto Subida Correctamente", "", "success");
 window.location.href = "#page-feed";
+document.getElementById('camera_txt').value="";
+
 $("#reload_button").click();
 
  }, function(error){
+swal("Oops...","Error al cargar la Foto", "", "error");
+window.location.href = "#page-feed";
  $.mobile.loading("hide");
 
  console.log(JSON.stringify(error));
@@ -223,7 +269,7 @@ $.mobile.loading("hide");
 <body style="background-color:white;">
 
 <div data-role="page" id="page-bio" style="background-color:white;">
-<div data-role="header"  data-position="fixed" style="height: 3em">
+<div data-role="header" data-position="fixed" style="height: 3em">
     <!--a id ="camera_button" class="flat-btn" data-shadow="false"></a-->
     <a href="#leftpanel" id="leftpanel_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
     <h1 id="title_bio"></h1>
@@ -270,10 +316,6 @@ $.mobile.loading("hide");
 <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay">
 
       <h3 id="title_leftpanel"></h3>
-      <!--p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p-->
-      <!--a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a-->
-      <!--a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a-->
       <ul data-role="listview" data-inset="true">
       <li data-icon="power" id="cerrar_sesion"><a href="#">cerrar Sesion</a></li>
       </ul>
@@ -283,8 +325,6 @@ $.mobile.loading("hide");
 
 <div data-role="page"  id="page-feed" style="background-color:white;">
     <div data-role="header"  data-position="fixed" style="height: 3em">
-        <!--a onclick="locationPage()" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-icon-cameraCustom"  data-transition="slide" data-direction="reverse"></a-->
-        <!--a id ="camera_button" class="flat-btn" data-shadow="false"></a-->
         <a href="#leftpanel_feed" id="leftpanel_button_feed" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
         <a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
         <h1 id="title_feed"></h1>
@@ -311,9 +351,6 @@ $.mobile.loading("hide");
 <div data-role="panel" id="leftpanel_feed" data-position="left" data-display="overlay">
 
       <h3 id="title_leftpanel_feed"></h3>
-      <!--p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-      <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p-->
-      <!--a href="#page-bio" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a-->
       <a id="cerrar_sesion" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Cerrar Sesion</a>
 
 </div><!-- /leftpanel -->
@@ -345,21 +382,18 @@ $.mobile.loading("hide");
 </div>
 
 <div data-role="page" id="page-guestbook-add" style="background-color:white;" >
-
 <div data-role="header"  data-position="fixed">
     <a href="#page-guestbook" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-<h1>Agregar</h1>
+<h1>Nuevo Mensaje</h1>
 </div>
 <div role="main" class="ui-content">
   <div data-role="fieldcontainer">
 
     <textarea cols="40" rows="12" name="comentario_txt" id="comentario_txt"></textarea>
 
-    <a id ="guardar_comentario" class="ui-btn ui-btn-b loginButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Guardar</a>
+    <a id ="guardar_mensaje" class="ui-btn customButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Guardar Mensaje</a>
   </div>
-
 </div>
-
 </div>
 
 
@@ -367,20 +401,23 @@ $.mobile.loading("hide");
 <div data-role="page" id="page-guestbook" style="background-color:white;" >
 <div data-role="header"  data-position="fixed">
     <a href="#leftpanel_guestbook" id="leftpanel_button_guestbook" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
-    <a href="#page-guestbook-add" id="guestbook-add" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-comment ui-btn-icon-notext ui-btn-inline"></a>
+    <a id="reload_button_guestbook" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
   <h1 id="title_guestbook"></h1>
 </div>
 <div role="main" class="ui-content">
+<a id="guestbook_add_button" class="ui-btn customButton  ui-icon-comment  ui-btn-icon-right" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Nuevo Mensaje</a>
+
   <form>
+
       <input data-type="search" id="divOfPs-input">
   </form>
-  <div class="elements" data-filter="true" data-input="#divOfPs-input">
-  <p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+  <div class="elements" data-filter="true" data-input="#divOfPs-input" id="guestbook_div">
+  <!--p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
   <p><strong>tags</strong> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
   <p><strong>Tags</strong> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores </p>
   <p><strong>are</strong> et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est</p>
   <p><strong>Filterable</strong> Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur</p>
-  <p><strong>Mauro Castro:</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+  <p><strong>Mauro Castro:</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p-->
   </div>
 
 </div>
@@ -430,6 +467,7 @@ $.mobile.loading("hide");
             <div class="photo-box">
                 <div class="image-wrap">
                    <img id="smallImage"  src="">
+                     <textarea cols="40" rows="4" name="camera_txt" id="camera_txt"></textarea>
                 </div>
             </div>
         </div>

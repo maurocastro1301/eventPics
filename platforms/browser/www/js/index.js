@@ -286,7 +286,7 @@ url: "http://mncphonegap.esy.es/phpmysql/event.php",
 data: dataString,
 crossDomain: true,
 cache: false,
-beforeSend: function(){ $("#event_submit").html('Verificando...');},
+//beforeSend: function(){ $("#event_submit").html('Verificando...');},
 success: function(data){
 if(data=="failed")
 {
@@ -297,7 +297,7 @@ document.getElementById('email').value="";
 document.getElementById('password').value="";
 clear_local_storage();
 
-$("#event_submit").html('Unirse');
+//$("#event_submit").html('Unirse');
 
 }else{
 
@@ -308,6 +308,7 @@ localStorage.event_date=obj[0].date;
 localStorage.event_bio_html=obj[0].bio_html;
 localStorage.event_bio_img=obj[0].bio_img;
 localStorage.event_title=obj[0].title;
+localStorage.guestbook_add="false";
 window.location.href = "gallery.html";
 }
 }
