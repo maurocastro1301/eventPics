@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
 <meta http-eqiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta charset="UTF-8" />
+
+
+
+
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.4.5.min.js"></script>
 
@@ -16,6 +20,9 @@
 <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" href="css/bio.css">
+ <script type="text/javascript" src="reloader/jquery.imageReloader.js"></script>
+
+
 
 
 <style>
@@ -329,9 +336,8 @@ $.mobile.loading("hide");
         <a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
         <h1 id="title_feed"></h1>
     </div>
-
-
-<div id="grid"></div><!-- /grid-b -->
+<h5 id="last_refresh_feed" style="text-align: center;"></h5>
+ <div id="grid"></div><!-- /grid-b -->
 
 
 <!--Footer-->
@@ -405,6 +411,7 @@ $.mobile.loading("hide");
   <h1 id="title_guestbook"></h1>
 </div>
 <div role="main" class="ui-content">
+<h5 id="last_refresh_guestbook" style="text-align: center;"></h5>
 <a id="guestbook_add_button" class="ui-btn customButton  ui-icon-comment  ui-btn-icon-right" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Nuevo Mensaje</a>
 
   <form>

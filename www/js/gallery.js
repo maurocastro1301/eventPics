@@ -25,6 +25,12 @@ $(window).load(function() {
 		get_photos();
 		guestbook_select();
 
+
+		setInterval(function() {
+			reload_photo();
+		  guestbook_select();
+		}, 60 * 1000);
+
     });
 		/*Fin document ready*/
 
@@ -43,6 +49,17 @@ function get_photos(){
 $("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
 			});
 	});
+
+	var d = new Date();
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth();
+	var curr_year = d.getFullYear();
+	var curr_hour = addZero(d.getHours());
+	var curr_min = addZero(d.getMinutes());
+	var curr_sec = addZero(d.getSeconds());
+
+document.getElementById('last_refresh_feed').innerHTML = "Última actualización: "+ curr_date + "/" + curr_month + "/" + curr_year+ " "+ curr_hour +":"+curr_min+":"+curr_sec;
+
 }
 
 		function countdown_fill(){
@@ -88,6 +105,15 @@ $("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onC
 $("#guestbook_div").prepend("<p><strong>"+guestbook_user_name+" "+guestbook_user_surname+": </strong>"+ guestbook_comment+" ("+guestbook_date+")</p>");
 					});
 			});
+			var d = new Date();
+			var curr_date = d.getDate();
+			var curr_month = d.getMonth();
+			var curr_year = d.getFullYear();
+			var curr_hour = addZero(d.getHours());
+			var curr_min = addZero(d.getMinutes());
+			var curr_sec = addZero(d.getSeconds());
+
+			document.getElementById('last_refresh_guestbook').innerHTML = "Última Actualización: "+ curr_date + "/" + curr_month + "/" + curr_year+ " "+ curr_hour +":"+curr_min+":"+curr_sec;
 
 		}
 
@@ -150,7 +176,6 @@ reload_photo();
 
 
  $(document).on('click', '#reload_button_guestbook', function() {
-
  guestbook_select();
   });
 
@@ -168,6 +193,23 @@ $("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onC
 			});
 	});
 
+var d = new Date();
+var curr_date = d.getDate();
+var curr_month = d.getMonth();
+var curr_year = d.getFullYear();
+var curr_hour = addZero(d.getHours());
+var curr_min = addZero(d.getMinutes());
+var curr_sec = addZero(d.getSeconds());
+
+document.getElementById('last_refresh_feed').innerHTML = "Última Actualización: "+ curr_date + "/" + curr_month + "/" + curr_year+ " "+ curr_hour +":"+curr_min+":"+curr_sec;
+
+	}
+
+	function addZero(i) {
+	    if (i < 10) {
+	        i = "0" + i;
+	    }
+	    return i;
 	}
 
 
@@ -265,7 +307,7 @@ navigator.camera.getPicture(onPhotoURISuccess, onFail, {
 
 			if($.trim(mensaje_guestbook).length>0){
 				var dataString="mensaje_guestbook="+mensaje_guestbook+"&user_id="+localStorage.user_id+"&event_id="+localStorage.event_id+"&guestbook=";
-				
+
 				$.ajax({
 				type: "POST",
 				url: "http://mncphonegap.esy.es/phpmysql/guestbook_insert.php",

@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>jQuery Image Reloader</title>
+    <link href="reloader/image_reloader.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="reloader/jquery.imageReloader.js"></script>
+  </head>
+  <body>
+    
+
+    <img src="http://mncphonegap.esy.es/phpmysql/photos/DEMO/1486568380440.jpg" width="200" height="200" class="slow-images">
+    <img src="http://dumitruglavan.com/wp-content/uploads/2011/11/IMG_0897-1024x768.jpg" width="200" height="200" class="slow-images">
+
+
+    <script type="text/javascript">
+      $(".slow-images").imageReloader();
+    </script>
+  </body>
+</html>
