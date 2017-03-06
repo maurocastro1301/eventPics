@@ -34,6 +34,13 @@ $(window).load(function() {
     });
 		/*Fin document ready*/
 
+function img_error(image){
+	image.onerror = null;
+     setTimeout(function (){
+         image.src += '?' + +new Date;
+      }, 1000);
+}
+
 
 function get_photos(){
 	var url = "http://mncphonegap.esy.es/phpmysql/photo.php?event_id="+localStorage.event_id;
@@ -46,7 +53,7 @@ function get_photos(){
 					var thumbnail = field.thumbnail;
 					maxId  = field.id;
 
-$("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"'></a></div>");
+$("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"' onerror='img_error(this)'></a></div>");
 			});
 	});
 

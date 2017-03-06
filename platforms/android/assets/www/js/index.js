@@ -92,18 +92,18 @@ $("#submit").html('Login');
 
 swal({
   title: "Unite a un Evento!",
-  text: "Igrese el código de evento",
+  text: "Ingrese el código de evento",
   type: "input",
   showCancelButton: true,
   closeOnConfirm: false,
   animation: "slide-from-top",
   showLoaderOnConfirm: true,
+  allowOutsideClick:true,
   inputPlaceholder: ""
 },
 function(inputValue){
   if (inputValue === false){
-
-  document.getElementById('email').value="";
+document.getElementById('email').value="";
 document.getElementById('password').value="";
 clear_local_storage();
 
@@ -114,7 +114,16 @@ clear_local_storage();
     return false
   }
 
-event(inputValue);
+
+var event_var = event(inputValue);
+
+/*
+  setTimeout(function(){
+
+      swal("Ajax request finished!");
+   }, 9000);
+*/
+//event(inputValue);
 
 });
 
@@ -274,13 +283,11 @@ window.location.href = "gallery.html";
 
 function event (inputValue){
 
-//var event_code=$("#event_txt").val();
 var event_code= inputValue;
 
 var dataString="event_code="+event_code+"&event=";
-if($.trim(event_code).length>0)
-{
-$.ajax({
+if($.trim(event_code).length>0){
+var request= $.ajax({
 type: "POST",
 url: "http://mncphonegap.esy.es/phpmysql/event.php",
 data: dataString,
@@ -311,9 +318,17 @@ localStorage.event_title=obj[0].title;
 localStorage.guestbook_add="false";
 window.location.href = "gallery.html";
 }
-}
+},
+error:function(e){
+
+    return false;
+   }
+
 });
+
 }return false;
+
+
 }
 
 function clear_local_storage(){
