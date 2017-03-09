@@ -91,7 +91,7 @@ document.getElementById('last_refresh_feed').innerHTML = "Última actualización
 			    // If the count down is over, write some text
 			    if (distance < 0) {
 			        clearInterval(x);
-			        document.getElementById("countdown").innerHTML = "A disfrutar!!";
+			        document.getElementById("countdown").innerHTML = localStorage.event_countdown_message;
 			    }
 			}, 1000);
 		}

@@ -315,6 +315,7 @@ localStorage.event_date=obj[0].date;
 localStorage.event_bio_html=obj[0].bio_html;
 localStorage.event_bio_img=obj[0].bio_img;
 localStorage.event_title=obj[0].title;
+localStorage.event_countdown_message=obj[0].countdown_message;
 localStorage.guestbook_add="false";
 window.location.href = "gallery.html";
 }
