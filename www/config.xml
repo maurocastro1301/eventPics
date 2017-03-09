@@ -18,8 +18,29 @@
     <allow-intent href="*" />
     <access origin="*" />
 	
-
 	
+	
+	
+    <platform name="ios">
+        <config-file parent="CFBundleURLTypes" target="*-Info.plist">
+            <array>
+                <dict>
+                    <key>Privacy - Camera Usage Description </key>
+                    <string>$(PRODUCT_NAME) camera use</string>
+                    <key>NSCameraUsageDescription</key>
+                    <string />
+                    <key>NSPhotoLibraryUsageDescription</key>
+                    <string />
+                </dict>
+            </array>
+        </config-file>
+		
+	<allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <!--preference name="StatusBarBackgroundColor" value="#000000" /-->
+		
+    </platform>
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
