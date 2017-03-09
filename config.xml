@@ -11,7 +11,7 @@
 	
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <gap:plugin name="cordova-plugin-camera" source="npm"/>
-	<gap:plugin name="org.apache.cordova.statusbar"/>
+	<plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb"/>
 	
     <access subdomains="false" uri="*" />
     <allow-navigation href="*" />
