@@ -13,8 +13,8 @@
     </author>
     <content src="index.html" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <gap:plugin name="cordova-plugin-camera" />
-    <gap:plugin name="org.apache.cordova.statusbar" />
+    <gap:plugin name="cordova-plugin-camera" source="npm" />
+    <gap:plugin name="cordova-plugin-statusbar" source="npm" />
     <access subdomains="false" uri="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />

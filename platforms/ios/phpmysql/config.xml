@@ -28,24 +28,12 @@
     </author>
     <content src="index.html" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <gap:plugin name="cordova-plugin-camera" />
-    <gap:plugin name="org.apache.cordova.statusbar" />
+    <gap:plugin name="cordova-plugin-camera" source="npm" />
+    <gap:plugin name="cordova-plugin-statusbar" source="npm" />
     <access subdomains="false" uri="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*" />
-    <config-file parent="CFBundleURLTypes" target="*-Info.plist">
-        <array>
-            <dict>
-                <key>Privacy - Camera Usage Description </key>
-                <key>NSCameraUsageDescription</key>
-                <key>NSPhotoLibraryUsageDescription</key>
-                <string>$(PRODUCT_NAME) camera use</string>
-            </dict>
-        </array>
-    </config-file>
-    <allow-intent href="itms:*" />
-    <allow-intent href="itms-apps:*" />
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
@@ -59,6 +47,6 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
 </widget>

@@ -8,26 +8,44 @@
         Mauro Castro
     </author>
     <content src="index.html" />
-
+	
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <gap:plugin name="cordova-plugin-camera" source="npm"/>
 	<gap:plugin name="cordova-plugin-statusbar" source="npm"/>
-		<gap:plugin name="cordova-plugin-file-transfer" source="npm"/>
-<gap:plugin name="cordova-plugin-file" source="npm"/>
-      <plugin name="cordova-plugin-ios-camera-permissions" spec="~1.0.4" />
-      
+	
     <access subdomains="false" uri="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*" />
-
-
-
+	
+	
+	
+	
+    <platform name="ios">
+        <config-file parent="CFBundleURLTypes" target="*-Info.plist">
+            <array>
+                <dict>
+                    <key>Privacy - Camera Usage Description </key>
+                    <string>$(PRODUCT_NAME) camera use</string>
+                    <key>NSCameraUsageDescription</key>
+                    <string />
+                    <key>NSPhotoLibraryUsageDescription</key>
+                    <string />
+                </dict>
+            </array>
+        </config-file>
+		
+	<allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <!--preference name="StatusBarBackgroundColor" value="#000000" /-->
+		
+    </platform>
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
     </feature>
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/camera" />
-
+    <plugin name="cordova-plugin-ios-camera-permissions" spec="~1.0.4" />
 </widget>
