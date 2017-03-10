@@ -18,6 +18,9 @@ $(window).load(function() {
        pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
         StatusBar.overlaysWebView(false);
+				document.addEventListener("backbutton", function (e) {
+				            e.preventDefault();
+				        }, false );
 
     }
 
