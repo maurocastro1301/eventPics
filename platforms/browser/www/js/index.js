@@ -60,82 +60,75 @@ submitHandler: function (form) {
 var email=$("#email").val();
 var password=$("#password").val();
 var dataString="email="+email+"&password="+password+"&login=";
-if($.trim(email).length>0 & $.trim(password).length>0)
-{
-$.ajax({
-type: "POST",
-url: "http://mncphonegap.esy.es/phpmysql/login.php",
-data: dataString,
-crossDomain: true,
-cache: false,
-beforeSend: function(){ $("#submit").html('Verificando...');},
-success: function(data){
-if(data=="failed")
-{
-swal("Oops...", "Login Incorrecto!!!", "error");
-$("#submit").html('Login');
-}else{
-
-var obj = JSON.parse(data);
-localStorage.login="true";
-localStorage.email_user=obj[0].email;
-localStorage.user_id=obj[0].id;
-localStorage.user_name=obj[0].name;
-localStorage.user_surname=obj[0].surname;
-$("#submit").html('Login');
 
 
+if(navigator.onLine){
 
-//window.location.href = "#page-event";
+  if($.trim(email).length>0 & $.trim(password).length>0)
+  {
+  $.ajax({
+  type: "POST",
+  url: "http://mncphonegap.esy.es/phpmysql/login.php",
+  data: dataString,
+  crossDomain: true,
+   timeout : 5000          ,
+  cache: false,
+  beforeSend: function(){ $("#submit").html('Verificando...');},
+  success: function(data){
+  if(data=="failed")
+  {
+  swal("Oops...", "Login Incorrecto!!!", "error");
+  $("#submit").html('Login');
+  }else{
 
-/* TODO  */
+  var obj = JSON.parse(data);
+  localStorage.login="true";
+  localStorage.email_user=obj[0].email;
+  localStorage.user_id=obj[0].id;
+  localStorage.user_name=obj[0].name;
+  localStorage.user_surname=obj[0].surname;
+  $("#submit").html('Login');
+  swal({
+    title: "Unite a un Evento!",
+    text: "Ingrese el código de evento",
+    type: "input",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    animation: "slide-from-top",
+    showLoaderOnConfirm: true,
+    allowOutsideClick:true,
+    inputPlaceholder: ""
+  },
+  function(inputValue){
+    if (inputValue === false){
+  document.getElementById('email').value="";
+  document.getElementById('password').value="";
+  clear_local_storage();
 
-swal({
-  title: "Unite a un Evento!",
-  text: "Ingrese el código de evento",
-  type: "input",
-  showCancelButton: true,
-  closeOnConfirm: false,
-  animation: "slide-from-top",
-  showLoaderOnConfirm: true,
-  allowOutsideClick:true,
-  inputPlaceholder: ""
-},
-function(inputValue){
-  if (inputValue === false){
-document.getElementById('email').value="";
-document.getElementById('password').value="";
-clear_local_storage();
+     return false;
+     }
+    if (inputValue === "") {
+      swal.showInputError("Debe Ingresar un código de Evento");
+      return false
+    }
+  var event_var = event(inputValue);
+  });
 
-   return false;
-   }
-  if (inputValue === "") {
-    swal.showInputError("Debe Ingresar un código de Evento");
-    return false
+  /* TODO  */
+
+
   }
 
 
-var event_var = event(inputValue);
+  }
+  });
+  }return false;
 
-/*
-  setTimeout(function(){
-
-      swal("Ajax request finished!");
-   }, 9000);
-*/
-//event(inputValue);
-
-});
-
-/* TODO  */
-
-
+}else {
+swal("Oops...", "No hay conexión a Internet", "error");
 }
 
 
-}
-});
-}return false;
 
 }
 });
@@ -188,40 +181,47 @@ var email=$("#email_register").val();
 var password=$("#password_register").val();
 var dataString="name="+name+"&surname="+surname+"&email="+email+"&password="+password+"&signup=";
 
-if($.trim(name).length>0 & $.trim(surname).length>0 & $.trim(email).length>0 & $.trim(password).length>0)
-{
-$.ajax({
-type: "POST",
-url: "http://mncphonegap.esy.es/phpmysql/signup.php",
-data: dataString,
-crossDomain: true,
-cache: false,
-beforeSend: function(){ $("#signup").val('Conectando...');},
-success: function(data){
 
-    //alert (data);
-if(data=="success")
-{
+if (navigator.onLine){
 
-swal("Gracias por registrarte!", "Ya podés inicar sesión", "success");
-window.location.href = "#page-signin";
+  if($.trim(name).length>0 & $.trim(surname).length>0 & $.trim(email).length>0 & $.trim(password).length>0)
+  {
+  $.ajax({
+  type: "POST",
+  url: "http://mncphonegap.esy.es/phpmysql/signup.php",
+  data: dataString,
+  crossDomain: true,
+  cache: false,
+  beforeSend: function(){ $("#signup").val('Conectando...');},
+  success: function(data){
+
+      //alert (data);
+  if(data=="success")
+  {
+
+  swal("Gracias por registrarte!", "Ya podés inicar sesión", "success");
+  window.location.href = "#page-signin";
+  }
+  else if(data="exist")
+  {
+  swal("Oops...", "El correo electrónico ya se encuentra registrado!", "error");
+  }
+  else if(data="failed")
+  {
+  swal("Oops...", "Algo Salio Mal", "error");
+  }
+  }
+  });
+  }return false;
+}else {
+swal("Oops...", "No hay conexión a Internet", "error");
 }
-else if(data="exist")
-{
-swal("Oops...", "El correo electrónico ya se encuentra registrado!", "error");
-}
-else if(data="failed")
-{
-swal("Oops...", "Algo Salio Mal", "error");
-}
+
+
 }
 });
-}return false;
-
-}
 });
-});
-
+/*
 $(document).on('click', '#event_submit', function() {
 $('#form_event').validate({
     rules: {
@@ -251,6 +251,7 @@ type: "POST",
 url: "http://mncphonegap.esy.es/phpmysql/event.php",
 data: dataString,
 crossDomain: true,
+timeout : 5000,
 cache: false,
 beforeSend: function(){ $("#event_submit").html('Verificando...');},
 success: function(data){
@@ -280,7 +281,7 @@ window.location.href = "gallery.html";
 });
 
 });
-
+*/
 function event (inputValue){
 
 var event_code= inputValue;
@@ -292,6 +293,7 @@ type: "POST",
 url: "http://mncphonegap.esy.es/phpmysql/event.php",
 data: dataString,
 crossDomain: true,
+ timeout : 5000          ,
 cache: false,
 //beforeSend: function(){ $("#event_submit").html('Verificando...');},
 success: function(data){

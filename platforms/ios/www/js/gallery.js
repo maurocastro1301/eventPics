@@ -9,9 +9,7 @@ $(window).load(function() {
 
 /*Inicio Document ready*/
     $(document).ready(function() {
-
-        document.addEventListener("deviceready",onDeviceReady,false);
-
+    document.addEventListener("deviceready",onDeviceReady,false);
 
     function onDeviceReady() {
 
@@ -24,7 +22,7 @@ $(window).load(function() {
 
     }
 
-	countdown_fill();
+		countdown_fill();
 		get_photos();
 		guestbook_select();
 
@@ -100,7 +98,6 @@ document.getElementById('last_refresh_feed').innerHTML = "Última actualización
 		}
 
 		function guestbook_select(){
-
 			var url = "http://mncphonegap.esy.es/phpmysql/guestbook_select.php?event_id="+localStorage.event_id+"&max_id="+guestbook_maxId;
 			$.getJSON(url, function(result) {
 					console.log(result);
@@ -146,48 +143,64 @@ function reply_click(clicked_id)
 }
 
 $(document).on('pagebeforeshow', '#page-content', function(){
- document.getElementById("contenido").innerHTML="<div class='loader'></div>"
 
-        var url = "http://mncphonegap.esy.es/phpmysql/photoById.php?photo_id="+ idPhoto;
-        $.getJSON(url, function(result) {
-            console.log(result);
-            $.each(result, function(i, field) {
-                var id = field.id;
-                var url = field.url;
-                //var thumbnail = field.thumbnail;
-                var user  = field.user_name + " " +field.user_surname;
-				var fecha = field.datecreate;;
-				var descripcion = field.descripcion;
-                maxId  = field.id;
+	if (navigator.onLine){
+		document.getElementById("contenido").innerHTML="<div class='loader'></div>"
 
-                if (descripcion == null){
-                    var descripcion = "";
-                }
+					 var url = "http://mncphonegap.esy.es/phpmysql/photoById.php?photo_id="+ idPhoto;
+					 $.getJSON(url, function(result) {
+							 console.log(result);
+							 $.each(result, function(i, field) {
+									 var id = field.id;
+									 var url = field.url;
+									 //var thumbnail = field.thumbnail;
+									 var user  = field.user_name + " " +field.user_surname;
+					 var fecha = field.datecreate;;
+					 var descripcion = field.descripcion;
+									 maxId  = field.id;
 
- document.getElementById("contenido").innerHTML= "<div class='photo-box'>"+
-                "<div class='image-wrap'>"+
-                     "<div class='user'>Creado por: "+ user + " </div>"+
-                     "<center><img src='"+ url + "'></center>"+
-                "</div>"+
-                "<div class='description'>"+ descripcion+
-                    "<div class='dateCustom'>Publicado: "+ fecha +"</div>"+
-                "</div>"+
-            "</div>";
+									 if (descripcion == null){
+											 var descripcion = "";
+									 }
 
-            });
-        });
+		document.getElementById("contenido").innerHTML= "<div class='photo-box'>"+
+									 "<div class='image-wrap'>"+
+												"<div class='user'>Creado por: "+ user + " </div>"+
+												"<center><img src='"+ url + "'></center>"+
+									 "</div>"+
+									 "<div class='description'>"+ descripcion+
+											 "<div class='dateCustom'>Publicado: "+ fecha +"</div>"+
+									 "</div>"+
+							 "</div>";
+
+							 });
+					 });
+	}else {
+	swal("Oops...", "No hay conexión a Internet", "error");
+	}
+
 });
 
 
 
 $(document).on('click', '#reload_button', function() {
+	if (navigator.onLine){
 reload_photo();
+	}else {
+	swal("Oops...", "No hay conexión a Internet", "error");
+	}
+
  });
 
 
  $(document).on('click', '#reload_button_guestbook', function() {
+
+	if (navigator.onLine){
  guestbook_select();
-  });
+ 	}else {
+ 	swal("Oops...", "No hay conexión a Internet", "error");
+ 	}
+});
 
 
 function reload_photo(){
@@ -311,49 +324,50 @@ navigator.camera.getPicture(onPhotoURISuccess, onFail, {
     }
 
 		$(document).on('click', '#guardar_mensaje', function() {
-			var mensaje_guestbook=encodeURIComponent($("#comentario_txt").val());
 
-		//	mensaje_guestbook= encodeURIComponent(mensaje_guestbook);
-
-			if($.trim(mensaje_guestbook).length>0){
-				var dataString="mensaje_guestbook="+mensaje_guestbook+"&user_id="+localStorage.user_id+"&event_id="+localStorage.event_id+"&guestbook=";
-
-				$.ajax({
-				type: "POST",
-				url: "http://mncphonegap.esy.es/phpmysql/guestbook_insert.php",
-				data: dataString,
-				crossDomain: true,
-				cache: false,
-				beforeSend: function(){
-					$.mobile.loading( "show", {
-				             text: "Procesando",
-				             textVisible: true,
-				             theme: "a",
-				             html: ""
-				     });
-				 },
-				success: function(data){
-				if(data=="success")
-				{
-					$.mobile.loading("hide");
-				swal("Mensaje Guardado Correctamente", "", "success");
-				window.location.href = "#page-guestbook";
-				localStorage.guestbook_add="true";
-				document.getElementById('guestbook_add_button').href= "#";
-				guestbook_select();
-				}else{
-					$.mobile.loading("hide");
-				swal("Oops...", "Surgió un error al intentar guardar el Mensaje", "error");
+			if (navigator.onLine){
+				var mensaje_guestbook=encodeURIComponent($("#comentario_txt").val());
+				if($.trim(mensaje_guestbook).length>0){
+					var dataString="mensaje_guestbook="+mensaje_guestbook+"&user_id="+localStorage.user_id+"&event_id="+localStorage.event_id+"&guestbook=";
+					$.ajax({
+					type: "POST",
+					url: "http://mncphonegap.esy.es/phpmysql/guestbook_insert.php",
+					data: dataString,
+					crossDomain: true,
+					timeout : 5000,
+					cache: false,
+					beforeSend: function(){
+						$.mobile.loading( "show", {
+					             text: "Procesando",
+					             textVisible: true,
+					             theme: "a",
+					             html: ""
+					     });
+					 },
+					success: function(data){
+					if(data=="success")
+					{
+						$.mobile.loading("hide");
+					swal("Mensaje Guardado Correctamente", "", "success");
+					window.location.href = "#page-guestbook";
+					localStorage.guestbook_add="true";
+					document.getElementById('guestbook_add_button').href= "#";
+					guestbook_select();
+					}else{
+						$.mobile.loading("hide");
+					swal("Oops...", "Surgió un error al intentar guardar el Mensaje", "error");
+					}
 				}
+
+					});
+
+				}else{
+					swal("Oops...", "Debe Ingresar un Mensaje", "error");
+				}
+
+			}else {
+			swal("Oops...", "No hay conexión a Internet", "error");
 			}
-
-				});
-
-			}else{
-				swal("Oops...", "Debe Ingresar un Mensaje", "error");
-			}
-
-
 		});
 
 
