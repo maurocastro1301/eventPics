@@ -146,6 +146,7 @@ $(document).on('pagebeforeshow', '#page-content', function(){
 
 	if (navigator.onLine){
 		document.getElementById("contenido").innerHTML="<div class='loader'></div>"
+	
 
 					 var url = "http://mncphonegap.esy.es/phpmysql/photoById.php?photo_id="+ idPhoto;
 					 $.getJSON(url, function(result) {
@@ -157,7 +158,7 @@ $(document).on('pagebeforeshow', '#page-content', function(){
 									 var user  = field.user_name + " " +field.user_surname;
 					 var fecha = field.datecreate;;
 					 var descripcion = field.descripcion;
-									 maxId  = field.id;
+									// maxId  = field.id;
 
 									 if (descripcion == null){
 											 var descripcion = "";
