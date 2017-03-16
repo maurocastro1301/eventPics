@@ -29,5 +29,46 @@
     </feature>
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/camera" />
+	
+	
+	     <platform name="android">
+              <icon src="res/android/ldpi.png" density="ldpi" />
+              <icon src="res/android/mdpi.png" density="mdpi" />
+              <icon src="res/android/hdpi.png" density="hdpi" />
+              <icon src="res/android/xhdpi.png" density="xhdpi" />
+     </platform>
+	 
+	 
+	 	<platform name="ios">
+        <config-file parent="CFBundleURLTypes" target="*-Info.plist">
+            <array>
+                <dict>
+                    <key>Privacy - Camera Usage Description </key>
+                    <string>$(PRODUCT_NAME) camera use</string>
+                    <key>NSCameraUsageDescription</key>
+                    <string />
+                    <key>NSPhotoLibraryUsageDescription</key>
+                    <string />
+                </dict>
+            </array>
+        </config-file>
+		
+	<allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <!--preference name="StatusBarBackgroundColor" value="#000000" /-->	
+	
+	  <icon src="res/ios/icon-60.png" width="60" height="60" />
+      <icon src="res/ios/icon-60@2x.png" width="120" height="120" />
+              <!-- iPad -->
+              <icon src="res/ios/icon-76.png" width="76" height="76" />
+              <icon src="res/ios/icon-76@2x.png" width="152" height="152" />
+              <!-- iOS 6.1 -->
+              <!-- Spotlight Icon -->
+              <icon src="res/ios/icon-40.png" width="40" height="40" />
+              <icon src="res/ios/icon-40@2x.png" width="80" height="80" />
+		
+    </platform>
+	
 
 </widget>
