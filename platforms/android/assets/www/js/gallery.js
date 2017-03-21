@@ -30,7 +30,8 @@ $(window).load(function() {
 		setInterval(function() {
 			reload_photo();
 		  guestbook_select();
-		}, 60 * 1000);
+		}, 300000);
+		//60 * 5000);
 
     });
 		/*Fin document ready*/
@@ -54,7 +55,7 @@ function get_photos(){
 					var thumbnail = field.thumbnail;
 					maxId  = field.id;
 
-$("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img src='"+thumbnail+"' onerror='img_error(this)'></a></div>");
+$("#grid").prepend("<div class='home w5'><a href='#page-content' id='"+id+"' onClick='reply_click(this.id)'><img data-src='"+thumbnail+"' onerror='img_error(this)' width='50' height='50'></a></div>");
 			});
 	});
 
@@ -145,8 +146,8 @@ function reply_click(clicked_id)
 $(document).on('pagebeforeshow', '#page-content', function(){
 
 	if (navigator.onLine){
-		document.getElementById("contenido").innerHTML="<div class='loader'></div>"
-	
+		document.getElementById("contenido").innerHTML="<div class='loader'><a href='#page-feed' class='ui-btn customButton' data-textonly='false' data-textvisible='true' data-msgtext='' data-inline='true'>Volver</a></div>";
+
 
 					 var url = "http://mncphonegap.esy.es/phpmysql/photoById.php?photo_id="+ idPhoto;
 					 $.getJSON(url, function(result) {
@@ -167,7 +168,7 @@ $(document).on('pagebeforeshow', '#page-content', function(){
 		document.getElementById("contenido").innerHTML= "<div class='photo-box'>"+
 									 "<div class='image-wrap'>"+
 												"<div class='user'>Creado por: "+ user + " </div>"+
-												"<center><img src='"+ url + "'></center>"+
+												"<center><img data-src='"+ url + "'></center>"+
 									 "</div>"+
 									 "<div class='description'>"+ descripcion+
 											 "<div class='dateCustom'>Publicado: "+ fecha +"</div>"+
