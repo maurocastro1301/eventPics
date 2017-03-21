@@ -1754,8 +1754,13 @@
 			font-size: 1.25em;
 		}
 
+		@font-face {
+        font-family: "brush";
+        src: url(BRUSHSCI.TTF);
+			}
 		h3 {
-			font-size: 1.2em;
+			font-family: "brush";
+			font-size: 2.0em;
 		}
 
 		h4 {

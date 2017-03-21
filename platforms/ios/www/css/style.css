@@ -1247,6 +1247,11 @@ hr {
   clip: auto;
 }
 
+@font-face {
+    font-family: "brush";
+    src: url(BRUSHSCI.TTF);
+  }
+
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;

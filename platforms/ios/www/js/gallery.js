@@ -48,7 +48,12 @@ function get_photos(){
 	var url = "http://mncphonegap.esy.es/phpmysql/photo.php?event_id="+localStorage.event_id;
 	/*var url = "http://mncphonegap.esy.es/phpmysql/photo.php";*/
 	$.getJSON(url, function(result) {
-			console.log(result);
+		console.log(result);
+
+			if (result.length > 0 ){
+			document.getElementById('feed_empty').style.display = "none";
+			}
+
 			$.each(result, function(i, field) {
 					var id = field.id;
 					var url = field.url;
@@ -102,7 +107,8 @@ document.getElementById('last_refresh_feed').innerHTML = "Última actualización
 			var url = "http://mncphonegap.esy.es/phpmysql/guestbook_select.php?event_id="+localStorage.event_id+"&max_id="+guestbook_maxId;
 			$.getJSON(url, function(result) {
 					console.log(result);
-					$.each(result, function(i, field) {
+
+						$.each(result, function(i, field) {
 						var guestbook_id = field.id;
 							var guestbook_date = field.date;
 							var guestbook_comment = field.comment;

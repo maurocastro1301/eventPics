@@ -320,8 +320,8 @@ $.mobile.loading("hide");
         <h1 id="title_feed"></h1>
     </div>
 <h5 id="last_refresh_feed" style="text-align: center;"></h5>
+<h4 id="feed_empty" style="text-align: center;">NO HAY FOTOS PARA MOSTRAR</h4>
  <div id="grid"></div><!-- /grid-b -->
-
 
 <!--Footer-->
 <div data-role="footer" data-position="fixed" data-tap-toggle="false">
@@ -338,12 +338,10 @@ $.mobile.loading("hide");
 
 <!-- leftpanel  -->
 <div data-role="panel" id="leftpanel_feed" data-position="left" data-display="overlay" data-theme="b">
-
       <h3 id="title_leftpanel_feed"></h3>
       <ul data-role="listview" data-inset="true">
       <li data-icon="power" id="cerrar_sesion"><a href="#">Cerrar Sesion</a></li>
       </ul>
-
 </div><!-- /leftpanel -->
 </div> <!-- /page-feed -->
 
@@ -397,6 +395,7 @@ $.mobile.loading("hide");
 </div>
 <div role="main" class="ui-content">
 <h5 id="last_refresh_guestbook" style="text-align: center;"></h5>
+
 <a id="guestbook_add_button" class="ui-btn customButton  ui-icon-comment  ui-btn-icon-right ui-alt-icon ui-nodisc-icon" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Nuevo Mensaje</a>
 
   <form>
