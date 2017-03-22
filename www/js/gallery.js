@@ -14,6 +14,21 @@ $(window).load(function() {
 
 /*Inicio Document ready*/
     $(document).ready(function() {
+//localStorage.color="#47C1B8";
+
+//Header
+document.getElementById('header_bio').style.backgroundColor = localStorage.color;
+document.getElementById('header_feed').style.backgroundColor = localStorage.color;
+document.getElementById('header_guestbook').style.backgroundColor = localStorage.color;
+document.getElementById('header_guestbook_add').style.backgroundColor = localStorage.color;
+document.getElementById('header_camera').style.backgroundColor = localStorage.color;
+document.getElementById('header_content').style.backgroundColor = localStorage.color;
+
+//Botones
+document.getElementById('guardar_mensaje').style.backgroundColor = localStorage.color;
+document.getElementById('guestbook_add_button').style.backgroundColor = localStorage.color;
+document.getElementById('subirfoto').style.backgroundColor = localStorage.color;
+
 
 
 
@@ -181,12 +196,12 @@ $(document).on('pagebeforeshow', '#page-content', function(){
 									 if (descripcion == null){
 											 var descripcion = "";
 									 }
+	//	document.getElementById("contenido_test").innerHTML="<img data-src='"+ url + "' onerror='img_error(this)' src='"+ url + "' class='lazy-loaded'>";
 
 		document.getElementById("contenido").innerHTML= "<div class='photo-box'>"+
 									 "<div class='image-wrap'>"+
 												"<div class='user'>Creado por: "+ user + " </div>"+
-								//			"<center><img data-src='"+ url + "' onerror='img_error(this,'"+url+"')'></center>"+
-													"<center><img data-src='"+ url + "' onerror='img_error(this)'></center>"+
+												"<center><img data-src='"+ url + "' onerror='img_error(this)' src='"+ url + "' class='lazy-loaded'></center>"+
 									 "</div>"+
 									 "<div class='description'>"+ descripcion+
 											 "<div class='dateCustom'>Publicado: "+ fecha +"</div>"+

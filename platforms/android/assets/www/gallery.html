@@ -24,6 +24,14 @@
 <script src="js/jquery.lazyloadxt.js"></script>
 <link rel="stylesheet" href="css/jquery.lazyloadxt.spinner.min.css">
 
+<!--link href="css/ghpages-materialize.css" type="text/css" rel="stylesheet">
+<link href="css/prism.css" rel="stylesheet">
+<link href="css/materialize.css" rel="stylesheet">
+<script src="js/materialize.js"></script>
+
+<link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
+
 
 
 <style>
@@ -98,7 +106,7 @@
 
 
 .ui-page .ui-header {
-background-color: #47C1B8 !important;
+background-color: #47C1B8; !important;
 font-weight: bold;
 text-decoration: none;
 text-shadow: 0 0 0 !important;
@@ -259,7 +267,7 @@ $.mobile.loading("hide");
 <body style="background-color:white;">
 
 <div data-role="page" id="page-bio" style="background-color:white;">
-<div data-role="header" data-position="fixed" data-tap-toggle="false" style="height: 3em">
+<div id="header_bio" data-role="header" data-position="fixed" data-tap-toggle="false" style="height: 3em">
     <!--a id ="camera_button" class="flat-btn" data-shadow="false"></a-->
     <a href="#leftpanel" id="leftpanel_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
     <h1 id="title_bio"></h1>
@@ -288,14 +296,28 @@ $.mobile.loading("hide");
 <!--div class="countdown" id="countdown"></div-->
 <div id="bio-content"></div>
 
+
+<!--div class="fixed-action-btn horizontal click-to-toggle">
+   <a class="btn-floating btn-large red">
+     <i class="material-icons">menu</i>
+   </a>
+   <ul>
+     <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+     <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+     <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+     <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+   </ul>
+ </div-->
+
+
 <!--Footer-->
 <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 <div data-role="navbar" data-iconpos="bottom" >
 <ul>
 
-<li><button id="button_page1" data-icon="home" style = "border-top: 3px solid black">Bio</button></li>
-<li><button id="button_page2" data-icon="home">Galeria</button></li>
-<li><button id="button_page3" data-icon="home" >Guest Book</button></li>
+<li><button id="button_page1" data-icon="home" style = "border-top: 3px solid black">Home</button></li>
+<li><button id="button_page2" data-icon="grid">Galería</button></li>
+<li><button id="button_page3" data-icon="comment">Comentarios</button></li>
 <li><button  class="buttonCustom"  id ="camera_button"></button></li>
 </ul>
 </div>
@@ -314,7 +336,7 @@ $.mobile.loading("hide");
 </div> <!--PAGE-BIO-->
 
 <div data-role="page"  id="page-feed" style="background-color:white;">
-    <div data-role="header"  data-position="fixed" style="height: 3em" data-tap-toggle="false">
+    <div id="header_feed"  data-role="header"  data-position="fixed" style="height: 3em" data-tap-toggle="false">
         <a href="#leftpanel_feed" id="leftpanel_button_feed" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
         <a id="reload_button" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
         <h1 id="title_feed"></h1>
@@ -329,10 +351,11 @@ $.mobile.loading("hide");
 <div data-role="navbar" data-iconpos="bottom" >
 <ul>
 
-<li><button id="button_page1" data-icon="home" >Bio</button></li>
-<li><button id="button_page2" data-icon="home" style = "border-top: 3px solid black">Galeria</button></li>
-<li><button id="button_page3" data-icon="home" >Guest Book</button></li>
-<li><button  class="buttonCustom"  id ="camera_button"></button></li>
+  <li><button id="button_page1" data-icon="home">Home</button></li>
+  <li><button id="button_page2" data-icon="grid" style = "border-top: 3px solid black">Galería</button></li>
+  <li><button id="button_page3" data-icon="comment">Comentarios</button></li>
+  <li><button  class="buttonCustom"  id ="camera_button"></button></li>
+
 </ul>
 </div>
 </div><!-- /footer -->
@@ -348,13 +371,18 @@ $.mobile.loading("hide");
 
 
 <div data-role="page" id="page-content" style="background-color:white;" >
-<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+<div id="header_content" data-role="header"  data-position="fixed" data-tap-toggle="false">
     <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
 <h1>Foto</h1>
 </div>
 <!--div class="loader"></div-->
+  <div id ="contenido_test" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+</div>
+
+
 <div class="instagram-content">
      <div class="row photos-wrap">
+
         <div id ="contenido" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 
             <!--div class="photo-box">
@@ -372,7 +400,7 @@ $.mobile.loading("hide");
 </div>
 
 <div data-role="page" id="page-guestbook-add" style="background-color:white;" >
-<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+<div id="header_guestbook_add" data-role="header"  data-position="fixed" data-tap-toggle="false">
     <a href="#page-guestbook" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
 <h1>Nuevo Mensaje</h1>
 </div>
@@ -389,7 +417,7 @@ $.mobile.loading("hide");
 
 
 <div data-role="page" id="page-guestbook" style="background-color:white;" >
-<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+<div id="header_guestbook" data-role="header"  data-position="fixed" data-tap-toggle="false">
     <a href="#leftpanel_guestbook" id="leftpanel_button_guestbook" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline"></a>
     <a id="reload_button_guestbook" class="ui-nodisc-icon ui-alt-icon ui-btn ui-corner-all ui-icon-refresh ui-btn-icon-notext ui-btn-inline"></a>
   <h1 id="title_guestbook"></h1>
@@ -418,10 +446,12 @@ $.mobile.loading("hide");
 <div data-role="navbar" data-iconpos="bottom" >
 <ul>
 
-<li><button id="button_page1" data-icon="home" >Bio</button></li>
-<li><button id="button_page2" data-icon="home" >Galeria</button></li>
-<li><button id="button_page3" data-icon="home" style = "border-top: 3px solid black">Guest Book</button></li>
-<li><button  class="buttonCustom"  id ="camera_button"></button></li>
+  <li><button id="button_page1" data-icon="home">Home</button></li>
+  <li><button id="button_page2" data-icon="grid" >Galería</button></li>
+  <li><button id="button_page3" data-icon="comment" style = "border-top: 3px solid black">Comentarios</button></li>
+  <li><button  class="buttonCustom"  id ="camera_button"></button></li>
+
+
 </ul>
 </div>
 </div><!-- /footer -->
@@ -446,7 +476,7 @@ $.mobile.loading("hide");
 
 
 <div data-role="page" id="page-camera" >
-<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+<div id="header_camera" data-role="header"  data-position="fixed" data-tap-toggle="false">
     <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
 <h1>Camera</h1>
 </div>
@@ -477,19 +507,17 @@ $.mobile.loading("hide");
 </div>
 
 
-<div data-role="page" id="page-test" >
+<!--div data-role="page" id="page-test" >
 <div data-role="header"  data-position="fixed" data-tap-toggle="false">
     <a href="#page-feed" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
 <h1>Camera</h1>
 </div>
 
 <div class="loader">
-  <a href="#page-feed" class="ui-btn customButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Volver</a>
+  <a id ="volver" href="#page-feed" class="ui-btn customButton" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Volver</a>
 </div>
 
-</div>
-
-
+</div-->
 
 
 </body>
